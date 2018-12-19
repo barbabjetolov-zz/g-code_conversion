@@ -1,0 +1,17 @@
+#variables for g-code file
+#write here all the desired variables for the G-code file
+DWELL = 0.1
+SPEED = 10
+BKSPEED = 20
+TILT = 0.000875
+XTILT = $TILT*0.05
+XTILT24 = $TILT*24
+NSCAN = 58
+SCANSEP = 0.0003
+DIST = 24
+BENDSTEP = 0.02
+WGSEP = 0.1
+WGSEP2 = 0.42
+TILTY = 0.0005
+POWERREP = 407
+DMMYMAX = 0.43
