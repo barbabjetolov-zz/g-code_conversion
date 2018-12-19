@@ -5,7 +5,7 @@
 Launch the script with 
 
 ```
-python extract.py
+python C2Gonversion.py
 ```
 
 ## init files
