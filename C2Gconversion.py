@@ -11,6 +11,8 @@ from cad_parser import cad_parser
 import gcode_conversion as gcc
 from init_parse import init_parse
 
+print('RSOFT-CAD to G_CODE conversion script\n')
+
 #open and parse init files
 for n,i in enumerate(sys.argv):
     if i == '-i' or i == '--init':
@@ -51,15 +53,21 @@ for key, val in gcodeinit.items():
 output.write('\n')
 output.write('$SCAN = 0\n')
 
+
 for n,content in enumerate(seg):
 
     b_e = [eval(content['begin.x']),eval(content['end.x']),eval(content['begin.y']),eval(content['end.y']),eval(content['begin.z']),eval(content['end.z'])]
 
-    distx = eval(content['end.x']) - eval(content['begin.x'])
-    disty = eval(content['end.y']) - eval(content['begin.y'])
-    distz = eval(content['end.z']) - eval(content['begin.z'])
+    if n == 0:
+        bfr = b_e
 
+    print('LINEAR X %f Y %f Z %f\n'%(b_e[0] - bfr[0], b_e[2] - bfr[2], b_e[4] - bfr[4]))
 
+    bfr = b_e
+
+    distx = b_e[0] - b_e[1]
+    disty = b_e[3] - b_e[2]
+    distz = b_e[5] - b_e[4]
 
     #begin 'while' loop and open shutter
     output.write('WHILE $SCAN LT $NSCANS\n')
