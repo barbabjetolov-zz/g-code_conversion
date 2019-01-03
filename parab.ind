@@ -1,0 +1,30 @@
+L = 100
+alpha = 0
+background_index = 1.49
+delta = 0.002627024
+dimension = 3
+eim = 0
+height = width
+free_space_wavelength = 1.55
+k0 = (2*pi)/free_space_wavelength
+sim_tool = ST_BEAMPROP
+slice_display_mode = DISPLAY_CONTOURMAPXZ
+structure = STRUCT_FIBER
+width = 10
+
+user_taper 1
+    type = UF_EXPRESSION
+    expression = (z-L/2)*(z-L/2)
+end user_taper
+
+segment 1
+    color = 2
+    position_taper = TAPER_USER_1
+    position_y_taper = TAPER_USER_1
+    begin.x = 0
+    begin.y = L*L/4
+    begin.z = 0
+    end.x = 0
+    end.y = L*L/4 rel begin segment 1
+    end.z = L rel begin segment 1
+end segment
