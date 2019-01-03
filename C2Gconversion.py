@@ -61,7 +61,7 @@ for n,content in enumerate(seg):
     if n == 0:
         bfr = b_e
 
-    print('LINEAR X %f Y %f Z %f\n'%(b_e[0] - bfr[0], b_e[2] - bfr[2], b_e[4] - bfr[4]))
+    output.write('LINEAR X %f Y %f Z %f\n'%(b_e[0] - bfr[0], b_e[2] - bfr[2], b_e[4] - bfr[4]))
 
     bfr = b_e
 
