@@ -8,10 +8,11 @@ def read_rsoft_file(file):
 def import_variables(content):
     dict_content = {}
     for c in content:
-        try:
-            dict_content[c.split(' ')[0]] = c.split(' ')[2]
-        except IndexError:
-            break
+        if bool(c) != False:
+            try:
+                dict_content[c.split(' ')[0]] = c.split(' ')[2]
+            except IndexError:
+                break
     return dict_content
 
 def find_user_taper(content):
@@ -64,6 +65,8 @@ def cad_parser(file):
     content = read_rsoft_file(file)
 
     dict_variables = import_variables(content)
+
+    print(dict_variables)
 
     taper = find_user_taper(content)
 
