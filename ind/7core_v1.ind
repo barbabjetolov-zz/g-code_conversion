@@ -338,4 +338,3 @@ launch_field 7
 	launch_position = -1*Ax+0*Bx
 	launch_position_y = -1*Ay+0*By
 end launch_field
-
