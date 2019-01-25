@@ -1,0 +1,5 @@
+#init file for extract.py script
+#variables for script
+input = ind/7core_v1.ind
+output = out.txt
+dz = 1e-2
