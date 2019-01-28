@@ -14,23 +14,9 @@ import gcode_conversion as gcc
 from init_parse import init_parse
 
 '''
-///////////////////////////
-Probably not needed anymore
-///////////////////////////
-
-def interpolation(linear,expression,seg,dz,file):
-    bz = eval(seg['begin.z'])
-    ez = eval(seg['end.z'])
-    for i in np.arange(bz,ez+dz,dz):
-        z = i
-        x = z*linear
-        y = eval(expression)
-        if i!=0:
-            #prints linear movements
-            file.write('LINEAR X %f Y %f Z %f F $SPEED\n'%(z-zi,y-yi,x-xi))
-        zi = z
-        xi = x
-        yi = y
+TODO:
+-add correction for laser head acceleration
+-add correction for glass refractive index
 '''
 
 '''
