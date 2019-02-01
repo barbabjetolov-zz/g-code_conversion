@@ -4,3 +4,4 @@ input = ind/7core_v1.ind
 output = out.txt
 dz = 1e-2
 ref_index = 1.5
+acc_correction = 1

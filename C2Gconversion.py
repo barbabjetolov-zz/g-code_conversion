@@ -16,7 +16,6 @@ from init_parse import init_parse
 '''
 TODO:
 -add correction for laser head acceleration
--add correction for glass refractive index
 '''
 
 '''
@@ -79,7 +78,6 @@ for i in range(0,4):
         except NameError:
             continue
 
-
 '''
 Converts extremes of segments from symbolic expression to number
 and associates a segment with its user_taper function
@@ -95,7 +93,7 @@ for n,segment in enumerate(seg):
                 pos = segment[i].split(' ')[3]
                 rel = segment[i].split(' ')[1]
                 ax = i.split('.')[1]
-                pos = pos + '.' + ax
+                pos += '.' + ax
                 segment[i] = str(eval(rel) + eval(seg[ind-1][pos]))
             except IndexError:
                 segment[i] = str(eval(segment[i]))
@@ -109,7 +107,6 @@ ind_tools.sel_sorting(seg,'begin.y')
 Reconstructing the waveguides
 '''
 ind_tools.wg_reconstruction(seg)
-
 
 '''
 Printing of declaration of variables on the gcode file
@@ -133,6 +130,9 @@ for key, val in gcodeinit.items():
 output.write('\n')
 output.write('$SCAN = 0\n')
 
+#just casting correction values to float, for convenience
+ref_index = float(dicinit['ref_index'])
+acc_correction = float(dicinit['acc_correction'])
 
 '''
 Most important part of the script: printing segments on file
@@ -148,7 +148,7 @@ for n,segment in enumerate(seg):
     if n == 0:
         bfr = b_e
 
-    output.write('LINEAR X %f Y %f Z %f\n'%(b_e[0] - bfr[0], b_e[2] - bfr[2], b_e[4] - bfr[4]))
+    output.write('LINEAR X %f Y %f Z %f F $SPEED\n'%(b_e[0] - bfr[0], ref_index*(b_e[2] - bfr[2]), b_e[4] - bfr[4]))
 
     bfr = b_e
 
@@ -161,11 +161,15 @@ for n,segment in enumerate(seg):
 
     #begin 'while' loop and open shutter
     output.write('WHILE $SCAN LT $NSCANS\n')
-    output.write('$do1.x = 1\n\n') #opens shutter
 
+    #adds laser head acceleration correction at the beginning of the waveguide
+    if b_e[4] == 0:
+        output.write(' LINEAR X 0 Y 0 Z -%f F $SPEED\n'%acc_correction)
+        output.write('$do1.x = 1\n\n') #opens shutter
+        output.write(' LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
 
     if 'position_taper' and 'position_y_taper' not in segment:
-        gcc.print_line(output,segment)
+        gcc.print_line(output,segment,ref_index)
 
     else:
         m = segment['end.x'] + '-' + segment['begin.x'] + '/' + segment['end.z'] + '-' + segment['begin.z']
@@ -176,11 +180,13 @@ for n,segment in enumerate(seg):
             if it['number'] == segment['position_taper']:
                 expression = it['expression']
 
+        gcc.interpolation(linearx,expression,segment,eval(dicinit['dz']),output,ref_index)
 
-        gcc.interpolation(linearx,expression,segment,eval(dicinit['dz']),output)
+    #adds laser head acceleration compensation at the end of the waveguide
+    if seg[n+1]['begin.z'] == '0':
+        output.write('LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
+        output.write('\n$do1.x = 0\n') #closes shutter
 
-    #closes shutter
-    output.write('\n$do1.x = 0\n')
 
     #finalizes 'while' loop
     output.write('$SCAN = $SCAN + 1\n')
