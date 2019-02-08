@@ -145,7 +145,7 @@ Prints one full waveguide at a time
 '''
 for n,segment in enumerate(seg):
 
-    output.write('\n//printing section %d\n'%(n+1))
+    output.write('///////////////\n//printing section %d\n////////////////\n'%(n+1))
 
     b_e = [eval(segment['begin.x']),eval(segment['end.x']),
            eval(segment['begin.y']),eval(segment['end.y']),
@@ -166,25 +166,28 @@ for n,segment in enumerate(seg):
     distz = b_e[5] - b_e[4]
 
     if VERBOSE==1:
-        print('Outputting section n. %d'%(n+1))
+        print('Outputting section n. %d.'%(n+1))
+
 
     #begin 'while' loop and open shutter
     output.write('WHILE $SCAN LT $NSCANS\n')
 
     #adds laser head acceleration correction at the beginning of the waveguide
     if b_e[4] == 0:
-    #if dicinit['acc_correction'] in dicinit:
         output.write('//moves the head before acc correction\n')
-        output.write('LINEAR X 0 Y 0 Z -%f F $SPEED\n'%acc_correction)
+        output.write('LINEAR X -%f Y 0 Z 0 F $SPEED\n'%acc_correction)
         output.write('$do1.x = 1\n\n') #opens shutter
         output.write('//acceleration correction\n')
-        output.write('LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
+        output.write('LINEAR X %f Y 0 Z 0 F $SPEED\n'%acc_correction)
 
     if 'position_taper' and 'position_y_taper' not in segment:
+        print('\tStraight line.')
         output.write('\n//print line\n')
         gcc.print_line(output,segment,ref_index)
 
     else:
+        print('\tFollowing taper function n. %s'%segment['position_taper'])
+        #computes the slope of the linear part
         m = segment['end.x'] + '-' + segment['begin.x'] + '/' + segment['end.z'] + '-' + segment['begin.z']
         linearx = eval(m)
 
