@@ -1,0 +1,1824 @@
+
+D = 25 
+Fact = (1-sqrt(1-(Theta/90)^2)) 
+L = 100 
+Offset = 30 
+R = L/(2*tan(Theta))+Offset/2 
+Theta = 2*atan(Offset/L) 
+Depth_length = 18600 
+Sq_diff = 1.4 
+Sq_length = 600 
+Straight_length = 2500 
+alpha = 0 
+background_index = 1.49 
+delta = 0.002627 
+dimension = 3 
+eim = 0 
+free_space_wavelength = 1.55 
+height = width 
+index = delta+background_index 
+k0 = (2*pi)/free_space_wavelength 
+launch_position = 4 
+launch_position_y = 4 
+mode_method = 0 
+mode_set_setting = 0-0 
+sim_tool = ST_BEAMPROP 
+slice_display_mode = DISPLAY_CONTOURMAPXZ 
+structure = STRUCT_CHANNEL 
+width = 8.4 
+ 
+user_taper 1 
+    type = UF_EXPRESSION 
+    expression = (1-sqrt(1-(z*Theta/90)^2))/Fact 
+end user_taper 
+ 
+ 
+segment 1 
+    color = 1 
+    comp_name = Wg1 
+    position_taper = TAPER_LINEAR 
+    begin.x = -12.6 
+    begin.y = 12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 1 
+    end.y = 0.0 rel begin segment 1 
+    end.z = 2500 rel begin segment 1 
+end segment 
+ 
+segment 2 
+    color = 1 
+    comp_name = Wg1 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -12.6 
+    begin.y = 12.6 
+    begin.z = 2500.0 
+    end.x = -1.2 rel begin segment 2 
+    end.y = 1.2 rel begin segment 2 
+    end.z = 300.0 rel begin segment 2 
+end segment 
+ 
+segment 3 
+    color = 1 
+    comp_name = Wg1 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -1.2 rel end segment 2 
+    begin.y = 1.2 rel end segment 2 
+    begin.z = 300.0 rel end segment 2 
+    end.x = 1.2 rel begin segment 3 
+    end.y = -1.2 rel begin segment 3 
+    end.z = -300.0 rel begin segment 3 
+end segment 
+ 
+segment 4 
+    color = 1 
+    comp_name = Wg1 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -15 
+    begin.y = 15.0 
+    begin.z = 3100.0 
+    end.x = -30.0 rel begin segment 4 
+    end.y = 0.0 rel begin segment 4 
+    end.z = 18600 rel begin segment 4 
+end segment 
+ 
+segment 5 
+    color = 1 
+    comp_name = Wg1 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -45 
+    begin.y = 15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 5 
+    end.y = -7.5 rel begin segment 5 
+    end.z = 1350.0 rel begin segment 5 
+end segment 
+ 
+segment 6 
+    color = 1 
+    comp_name = Wg1 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 5 
+    begin.y = -7.5 rel end segment 5 
+    begin.z = 1350.0 rel end segment 5 
+    end.x = -0.0 rel begin segment 6 
+    end.y = 7.5 rel begin segment 6 
+    end.z = -1350.0 rel begin segment 6 
+end segment 
+ 
+segment 7 
+    color = 1 
+    comp_name = Wg1 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -45 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 7.2 rel begin segment 7 
+    end.y = 0.0 rel begin segment 7 
+    end.z = 3600 rel begin segment 7 
+end segment 
+ 
+segment 8 
+    color = 2 
+    comp_name = Wg2 
+    position_taper = TAPER_LINEAR 
+    begin.x = -4.2 
+    begin.y = 12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 8 
+    end.y = 0.0 rel begin segment 8 
+    end.z = 2500 rel begin segment 8 
+end segment 
+ 
+segment 9 
+    color = 2 
+    comp_name = Wg2 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -4.2 
+    begin.y = 12.6 
+    begin.z = 2500.0 
+    end.x = -0.4 rel begin segment 9 
+    end.y = 1.2 rel begin segment 9 
+    end.z = 300.0 rel begin segment 9 
+end segment 
+ 
+segment 10 
+    color = 2 
+    comp_name = Wg2 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -0.4 rel end segment 9 
+    begin.y = 1.2 rel end segment 9 
+    begin.z = 300.0 rel end segment 9 
+    end.x = 0.4 rel begin segment 10 
+    end.y = -1.2 rel begin segment 10 
+    end.z = -300.0 rel begin segment 10 
+end segment 
+ 
+segment 11 
+    color = 2 
+    comp_name = Wg2 
+    position_taper = TAPER_LINEAR 
+    begin.x = -5 
+    begin.y = 15.0 
+    begin.z = 3100.0 
+    end.x = 0.0 rel begin segment 11 
+    end.y = 0.0 rel begin segment 11 
+    end.z = 18600 rel begin segment 11 
+end segment 
+ 
+segment 12 
+    color = 2 
+    comp_name = Wg2 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -5 
+    begin.y = 15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 12 
+    end.y = -7.5 rel begin segment 12 
+    end.z = 1350.0 rel begin segment 12 
+end segment 
+ 
+segment 13 
+    color = 2 
+    comp_name = Wg2 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 12 
+    begin.y = -7.5 rel end segment 12 
+    begin.z = 1350.0 rel end segment 12 
+    end.x = -0.0 rel begin segment 13 
+    end.y = 7.5 rel begin segment 13 
+    end.z = -1350.0 rel begin segment 13 
+end segment 
+ 
+segment 14 
+    color = 2 
+    comp_name = Wg2 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -5 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 0.8 rel begin segment 14 
+    end.y = 0.0 rel begin segment 14 
+    end.z = 3600 rel begin segment 14 
+end segment 
+ 
+segment 15 
+    color = 3 
+    comp_name = Wg3 
+    position_taper = TAPER_LINEAR 
+    begin.x = 4.2 
+    begin.y = 12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 15 
+    end.y = 0.0 rel begin segment 15 
+    end.z = 2500 rel begin segment 15 
+end segment 
+ 
+segment 16 
+    color = 3 
+    comp_name = Wg3 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 4.2 
+    begin.y = 12.6 
+    begin.z = 2500.0 
+    end.x = 0.4 rel begin segment 16 
+    end.y = 1.2 rel begin segment 16 
+    end.z = 300.0 rel begin segment 16 
+end segment 
+ 
+segment 17 
+    color = 3 
+    comp_name = Wg3 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.4 rel end segment 16 
+    begin.y = 1.2 rel end segment 16 
+    begin.z = 300.0 rel end segment 16 
+    end.x = -0.4 rel begin segment 17 
+    end.y = -1.2 rel begin segment 17 
+    end.z = -300.0 rel begin segment 17 
+end segment 
+ 
+segment 18 
+    color = 3 
+    comp_name = Wg3 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 5 
+    begin.y = 15.0 
+    begin.z = 3100.0 
+    end.x = 30.0 rel begin segment 18 
+    end.y = 0.0 rel begin segment 18 
+    end.z = 18600 rel begin segment 18 
+end segment 
+ 
+segment 19 
+    color = 3 
+    comp_name = Wg3 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 35 
+    begin.y = 15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 19 
+    end.y = -7.5 rel begin segment 19 
+    end.z = 1350.0 rel begin segment 19 
+end segment 
+ 
+segment 20 
+    color = 3 
+    comp_name = Wg3 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 19 
+    begin.y = -7.5 rel end segment 19 
+    begin.z = 1350.0 rel end segment 19 
+    end.x = -0.0 rel begin segment 20 
+    end.y = 7.5 rel begin segment 20 
+    end.z = -1350.0 rel begin segment 20 
+end segment 
+ 
+segment 21 
+    color = 3 
+    comp_name = Wg3 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 35 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -5.6 rel begin segment 21 
+    end.y = 0.0 rel begin segment 21 
+    end.z = 3600 rel begin segment 21 
+end segment 
+ 
+segment 22 
+    color = 4 
+    comp_name = Wg4 
+    position_taper = TAPER_LINEAR 
+    begin.x = 12.6 
+    begin.y = 12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 22 
+    end.y = 0.0 rel begin segment 22 
+    end.z = 2500 rel begin segment 22 
+end segment 
+ 
+segment 23 
+    color = 4 
+    comp_name = Wg4 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 12.6 
+    begin.y = 12.6 
+    begin.z = 2500.0 
+    end.x = 1.2 rel begin segment 23 
+    end.y = 1.2 rel begin segment 23 
+    end.z = 300.0 rel begin segment 23 
+end segment 
+ 
+segment 24 
+    color = 4 
+    comp_name = Wg4 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 1.2 rel end segment 23 
+    begin.y = 1.2 rel end segment 23 
+    begin.z = 300.0 rel end segment 23 
+    end.x = -1.2 rel begin segment 24 
+    end.y = -1.2 rel begin segment 24 
+    end.z = -300.0 rel begin segment 24 
+end segment 
+ 
+segment 25 
+    color = 4 
+    comp_name = Wg4 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 15 
+    begin.y = 15.0 
+    begin.z = 3100.0 
+    end.x = 60.0 rel begin segment 25 
+    end.y = 0.0 rel begin segment 25 
+    end.z = 18600 rel begin segment 25 
+end segment 
+ 
+segment 26 
+    color = 4 
+    comp_name = Wg4 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 75 
+    begin.y = 15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 26 
+    end.y = -7.5 rel begin segment 26 
+    end.z = 1350.0 rel begin segment 26 
+end segment 
+ 
+segment 27 
+    color = 4 
+    comp_name = Wg4 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 26 
+    begin.y = -7.5 rel end segment 26 
+    begin.z = 1350.0 rel end segment 26 
+    end.x = -0.0 rel begin segment 27 
+    end.y = 7.5 rel begin segment 27 
+    end.z = -1350.0 rel begin segment 27 
+end segment 
+ 
+segment 28 
+    color = 4 
+    comp_name = Wg4 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 75 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -12.0 rel begin segment 28 
+    end.y = 0.0 rel begin segment 28 
+    end.z = 3600 rel begin segment 28 
+end segment 
+ 
+segment 29 
+    color = 5 
+    comp_name = Wg5 
+    position_taper = TAPER_LINEAR 
+    begin.x = -12.6 
+    begin.y = 4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 29 
+    end.y = 0.0 rel begin segment 29 
+    end.z = 2500 rel begin segment 29 
+end segment 
+ 
+segment 30 
+    color = 5 
+    comp_name = Wg5 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -12.6 
+    begin.y = 4.2 
+    begin.z = 2500.0 
+    end.x = -1.2 rel begin segment 30 
+    end.y = 0.4 rel begin segment 30 
+    end.z = 300.0 rel begin segment 30 
+end segment 
+ 
+segment 31 
+    color = 5 
+    comp_name = Wg5 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -1.2 rel end segment 30 
+    begin.y = 0.4 rel end segment 30 
+    begin.z = 300.0 rel end segment 30 
+    end.x = 1.2 rel begin segment 31 
+    end.y = -0.4 rel begin segment 31 
+    end.z = -300.0 rel begin segment 31 
+end segment 
+ 
+segment 32 
+    color = 5 
+    comp_name = Wg5 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -15 
+    begin.y = 5.0 
+    begin.z = 3100.0 
+    end.x = -40.0 rel begin segment 32 
+    end.y = 0.0 rel begin segment 32 
+    end.z = 18600 rel begin segment 32 
+end segment 
+ 
+segment 33 
+    color = 5 
+    comp_name = Wg5 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -55 
+    begin.y = 5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 33 
+    end.y = -2.5 rel begin segment 33 
+    end.z = 1350.0 rel begin segment 33 
+end segment 
+ 
+segment 34 
+    color = 5 
+    comp_name = Wg5 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 33 
+    begin.y = -2.5 rel end segment 33 
+    begin.z = 1350.0 rel end segment 33 
+    end.x = -0.0 rel begin segment 34 
+    end.y = 2.5 rel begin segment 34 
+    end.z = -1350.0 rel begin segment 34 
+end segment 
+ 
+segment 35 
+    color = 5 
+    comp_name = Wg5 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -55 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 8.8 rel begin segment 35 
+    end.y = 0.0 rel begin segment 35 
+    end.z = 3600 rel begin segment 35 
+end segment 
+ 
+segment 36 
+    color = 6 
+    comp_name = Wg6 
+    position_taper = TAPER_LINEAR 
+    begin.x = -4.2 
+    begin.y = 4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 36 
+    end.y = 0.0 rel begin segment 36 
+    end.z = 2500 rel begin segment 36 
+end segment 
+ 
+segment 37 
+    color = 6 
+    comp_name = Wg6 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -4.2 
+    begin.y = 4.2 
+    begin.z = 2500.0 
+    end.x = -0.4 rel begin segment 37 
+    end.y = 0.4 rel begin segment 37 
+    end.z = 300.0 rel begin segment 37 
+end segment 
+ 
+segment 38 
+    color = 6 
+    comp_name = Wg6 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -0.4 rel end segment 37 
+    begin.y = 0.4 rel end segment 37 
+    begin.z = 300.0 rel end segment 37 
+    end.x = 0.4 rel begin segment 38 
+    end.y = -0.4 rel begin segment 38 
+    end.z = -300.0 rel begin segment 38 
+end segment 
+ 
+segment 39 
+    color = 6 
+    comp_name = Wg6 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -5 
+    begin.y = 5.0 
+    begin.z = 3100.0 
+    end.x = -10.0 rel begin segment 39 
+    end.y = 0.0 rel begin segment 39 
+    end.z = 18600 rel begin segment 39 
+end segment 
+ 
+segment 40 
+    color = 6 
+    comp_name = Wg6 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -15 
+    begin.y = 5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 40 
+    end.y = -2.5 rel begin segment 40 
+    end.z = 1350.0 rel begin segment 40 
+end segment 
+ 
+segment 41 
+    color = 6 
+    comp_name = Wg6 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 40 
+    begin.y = -2.5 rel end segment 40 
+    begin.z = 1350.0 rel end segment 40 
+    end.x = -0.0 rel begin segment 41 
+    end.y = 2.5 rel begin segment 41 
+    end.z = -1350.0 rel begin segment 41 
+end segment 
+ 
+segment 42 
+    color = 6 
+    comp_name = Wg6 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -15 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 2.4 rel begin segment 42 
+    end.y = 0.0 rel begin segment 42 
+    end.z = 3600 rel begin segment 42 
+end segment 
+ 
+segment 43 
+    color = 7 
+    comp_name = Wg7 
+    position_taper = TAPER_LINEAR 
+    begin.x = 4.2 
+    begin.y = 4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 43 
+    end.y = 0.0 rel begin segment 43 
+    end.z = 2500 rel begin segment 43 
+end segment 
+ 
+segment 44 
+    color = 7 
+    comp_name = Wg7 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 4.2 
+    begin.y = 4.2 
+    begin.z = 2500.0 
+    end.x = 0.4 rel begin segment 44 
+    end.y = 0.4 rel begin segment 44 
+    end.z = 300.0 rel begin segment 44 
+end segment 
+ 
+segment 45 
+    color = 7 
+    comp_name = Wg7 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.4 rel end segment 44 
+    begin.y = 0.4 rel end segment 44 
+    begin.z = 300.0 rel end segment 44 
+    end.x = -0.4 rel begin segment 45 
+    end.y = -0.4 rel begin segment 45 
+    end.z = -300.0 rel begin segment 45 
+end segment 
+ 
+segment 46 
+    color = 7 
+    comp_name = Wg7 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 5 
+    begin.y = 5.0 
+    begin.z = 3100.0 
+    end.x = 20.0 rel begin segment 46 
+    end.y = 0.0 rel begin segment 46 
+    end.z = 18600 rel begin segment 46 
+end segment 
+ 
+segment 47 
+    color = 7 
+    comp_name = Wg7 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 25 
+    begin.y = 5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 47 
+    end.y = -2.5 rel begin segment 47 
+    end.z = 1350.0 rel begin segment 47 
+end segment 
+ 
+segment 48 
+    color = 7 
+    comp_name = Wg7 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 47 
+    begin.y = -2.5 rel end segment 47 
+    begin.z = 1350.0 rel end segment 47 
+    end.x = -0.0 rel begin segment 48 
+    end.y = 2.5 rel begin segment 48 
+    end.z = -1350.0 rel begin segment 48 
+end segment 
+ 
+segment 49 
+    color = 7 
+    comp_name = Wg7 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 25 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -4.0 rel begin segment 49 
+    end.y = 0.0 rel begin segment 49 
+    end.z = 3600 rel begin segment 49 
+end segment 
+ 
+segment 50 
+    color = 8 
+    comp_name = Wg8 
+    position_taper = TAPER_LINEAR 
+    begin.x = 12.6 
+    begin.y = 4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 50 
+    end.y = 0.0 rel begin segment 50 
+    end.z = 2500 rel begin segment 50 
+end segment 
+ 
+segment 51 
+    color = 8 
+    comp_name = Wg8 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 12.6 
+    begin.y = 4.2 
+    begin.z = 2500.0 
+    end.x = 1.2 rel begin segment 51 
+    end.y = 0.4 rel begin segment 51 
+    end.z = 300.0 rel begin segment 51 
+end segment 
+ 
+segment 52 
+    color = 8 
+    comp_name = Wg8 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 1.2 rel end segment 51 
+    begin.y = 0.4 rel end segment 51 
+    begin.z = 300.0 rel end segment 51 
+    end.x = -1.2 rel begin segment 52 
+    end.y = -0.4 rel begin segment 52 
+    end.z = -300.0 rel begin segment 52 
+end segment 
+ 
+segment 53 
+    color = 8 
+    comp_name = Wg8 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 15 
+    begin.y = 5.0 
+    begin.z = 3100.0 
+    end.x = 50.0 rel begin segment 53 
+    end.y = 0.0 rel begin segment 53 
+    end.z = 18600 rel begin segment 53 
+end segment 
+ 
+segment 54 
+    color = 8 
+    comp_name = Wg8 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 65 
+    begin.y = 5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 54 
+    end.y = -2.5 rel begin segment 54 
+    end.z = 1350.0 rel begin segment 54 
+end segment 
+ 
+segment 55 
+    color = 8 
+    comp_name = Wg8 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 54 
+    begin.y = -2.5 rel end segment 54 
+    begin.z = 1350.0 rel end segment 54 
+    end.x = -0.0 rel begin segment 55 
+    end.y = 2.5 rel begin segment 55 
+    end.z = -1350.0 rel begin segment 55 
+end segment 
+ 
+segment 56 
+    color = 8 
+    comp_name = Wg8 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 65 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -10.4 rel begin segment 56 
+    end.y = 0.0 rel begin segment 56 
+    end.z = 3600 rel begin segment 56 
+end segment 
+ 
+segment 57 
+    color = 9 
+    comp_name = Wg9 
+    position_taper = TAPER_LINEAR 
+    begin.x = -12.6 
+    begin.y = -4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 57 
+    end.y = 0.0 rel begin segment 57 
+    end.z = 2500 rel begin segment 57 
+end segment 
+ 
+segment 58 
+    color = 9 
+    comp_name = Wg9 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -12.6 
+    begin.y = -4.2 
+    begin.z = 2500.0 
+    end.x = -1.2 rel begin segment 58 
+    end.y = -0.4 rel begin segment 58 
+    end.z = 300.0 rel begin segment 58 
+end segment 
+ 
+segment 59 
+    color = 9 
+    comp_name = Wg9 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -1.2 rel end segment 58 
+    begin.y = -0.4 rel end segment 58 
+    begin.z = 300.0 rel end segment 58 
+    end.x = 1.2 rel begin segment 59 
+    end.y = 0.4 rel begin segment 59 
+    end.z = -300.0 rel begin segment 59 
+end segment 
+ 
+segment 60 
+    color = 9 
+    comp_name = Wg9 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -15 
+    begin.y = -5.0 
+    begin.z = 3100.0 
+    end.x = -50.0 rel begin segment 60 
+    end.y = 0.0 rel begin segment 60 
+    end.z = 18600 rel begin segment 60 
+end segment 
+ 
+segment 61 
+    color = 9 
+    comp_name = Wg9 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -65 
+    begin.y = -5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 61 
+    end.y = 2.5 rel begin segment 61 
+    end.z = 1350.0 rel begin segment 61 
+end segment 
+ 
+segment 62 
+    color = 9 
+    comp_name = Wg9 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 61 
+    begin.y = 2.5 rel end segment 61 
+    begin.z = 1350.0 rel end segment 61 
+    end.x = -0.0 rel begin segment 62 
+    end.y = -2.5 rel begin segment 62 
+    end.z = -1350.0 rel begin segment 62 
+end segment 
+ 
+segment 63 
+    color = 9 
+    comp_name = Wg9 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -65 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 10.4 rel begin segment 63 
+    end.y = 0.0 rel begin segment 63 
+    end.z = 3600 rel begin segment 63 
+end segment 
+ 
+segment 64 
+    color = 10 
+    comp_name = Wg10 
+    position_taper = TAPER_LINEAR 
+    begin.x = -4.2 
+    begin.y = -4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 64 
+    end.y = 0.0 rel begin segment 64 
+    end.z = 2500 rel begin segment 64 
+end segment 
+ 
+segment 65 
+    color = 10 
+    comp_name = Wg10 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -4.2 
+    begin.y = -4.2 
+    begin.z = 2500.0 
+    end.x = -0.4 rel begin segment 65 
+    end.y = -0.4 rel begin segment 65 
+    end.z = 300.0 rel begin segment 65 
+end segment 
+ 
+segment 66 
+    color = 10 
+    comp_name = Wg10 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -0.4 rel end segment 65 
+    begin.y = -0.4 rel end segment 65 
+    begin.z = 300.0 rel end segment 65 
+    end.x = 0.4 rel begin segment 66 
+    end.y = 0.4 rel begin segment 66 
+    end.z = -300.0 rel begin segment 66 
+end segment 
+ 
+segment 67 
+    color = 10 
+    comp_name = Wg10 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -5 
+    begin.y = -5.0 
+    begin.z = 3100.0 
+    end.x = -20.0 rel begin segment 67 
+    end.y = 0.0 rel begin segment 67 
+    end.z = 18600 rel begin segment 67 
+end segment 
+ 
+segment 68 
+    color = 10 
+    comp_name = Wg10 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -25 
+    begin.y = -5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 68 
+    end.y = 2.5 rel begin segment 68 
+    end.z = 1350.0 rel begin segment 68 
+end segment 
+ 
+segment 69 
+    color = 10 
+    comp_name = Wg10 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 68 
+    begin.y = 2.5 rel end segment 68 
+    begin.z = 1350.0 rel end segment 68 
+    end.x = -0.0 rel begin segment 69 
+    end.y = -2.5 rel begin segment 69 
+    end.z = -1350.0 rel begin segment 69 
+end segment 
+ 
+segment 70 
+    color = 10 
+    comp_name = Wg10 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -25 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 4.0 rel begin segment 70 
+    end.y = 0.0 rel begin segment 70 
+    end.z = 3600 rel begin segment 70 
+end segment 
+ 
+segment 71 
+    color = 11 
+    comp_name = Wg11 
+    position_taper = TAPER_LINEAR 
+    begin.x = 4.2 
+    begin.y = -4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 71 
+    end.y = 0.0 rel begin segment 71 
+    end.z = 2500 rel begin segment 71 
+end segment 
+ 
+segment 72 
+    color = 11 
+    comp_name = Wg11 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 4.2 
+    begin.y = -4.2 
+    begin.z = 2500.0 
+    end.x = 0.4 rel begin segment 72 
+    end.y = -0.4 rel begin segment 72 
+    end.z = 300.0 rel begin segment 72 
+end segment 
+ 
+segment 73 
+    color = 11 
+    comp_name = Wg11 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.4 rel end segment 72 
+    begin.y = -0.4 rel end segment 72 
+    begin.z = 300.0 rel end segment 72 
+    end.x = -0.4 rel begin segment 73 
+    end.y = 0.4 rel begin segment 73 
+    end.z = -300.0 rel begin segment 73 
+end segment 
+ 
+segment 74 
+    color = 11 
+    comp_name = Wg11 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 5 
+    begin.y = -5.0 
+    begin.z = 3100.0 
+    end.x = 10.0 rel begin segment 74 
+    end.y = 0.0 rel begin segment 74 
+    end.z = 18600 rel begin segment 74 
+end segment 
+ 
+segment 75 
+    color = 11 
+    comp_name = Wg11 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 15 
+    begin.y = -5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 75 
+    end.y = 2.5 rel begin segment 75 
+    end.z = 1350.0 rel begin segment 75 
+end segment 
+ 
+segment 76 
+    color = 11 
+    comp_name = Wg11 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 75 
+    begin.y = 2.5 rel end segment 75 
+    begin.z = 1350.0 rel end segment 75 
+    end.x = -0.0 rel begin segment 76 
+    end.y = -2.5 rel begin segment 76 
+    end.z = -1350.0 rel begin segment 76 
+end segment 
+ 
+segment 77 
+    color = 11 
+    comp_name = Wg11 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 15 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -2.4 rel begin segment 77 
+    end.y = 0.0 rel begin segment 77 
+    end.z = 3600 rel begin segment 77 
+end segment 
+ 
+segment 78 
+    color = 12 
+    comp_name = Wg12 
+    position_taper = TAPER_LINEAR 
+    begin.x = 12.6 
+    begin.y = -4.2 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 78 
+    end.y = 0.0 rel begin segment 78 
+    end.z = 2500 rel begin segment 78 
+end segment 
+ 
+segment 79 
+    color = 12 
+    comp_name = Wg12 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 12.6 
+    begin.y = -4.2 
+    begin.z = 2500.0 
+    end.x = 1.2 rel begin segment 79 
+    end.y = -0.4 rel begin segment 79 
+    end.z = 300.0 rel begin segment 79 
+end segment 
+ 
+segment 80 
+    color = 12 
+    comp_name = Wg12 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 1.2 rel end segment 79 
+    begin.y = -0.4 rel end segment 79 
+    begin.z = 300.0 rel end segment 79 
+    end.x = -1.2 rel begin segment 80 
+    end.y = 0.4 rel begin segment 80 
+    end.z = -300.0 rel begin segment 80 
+end segment 
+ 
+segment 81 
+    color = 12 
+    comp_name = Wg12 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 15 
+    begin.y = -5.0 
+    begin.z = 3100.0 
+    end.x = 40.0 rel begin segment 81 
+    end.y = 0.0 rel begin segment 81 
+    end.z = 18600 rel begin segment 81 
+end segment 
+ 
+segment 82 
+    color = 12 
+    comp_name = Wg12 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 55 
+    begin.y = -5.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 82 
+    end.y = 2.5 rel begin segment 82 
+    end.z = 1350.0 rel begin segment 82 
+end segment 
+ 
+segment 83 
+    color = 12 
+    comp_name = Wg12 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 82 
+    begin.y = 2.5 rel end segment 82 
+    begin.z = 1350.0 rel end segment 82 
+    end.x = -0.0 rel begin segment 83 
+    end.y = -2.5 rel begin segment 83 
+    end.z = -1350.0 rel begin segment 83 
+end segment 
+ 
+segment 84 
+    color = 12 
+    comp_name = Wg12 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 55 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -8.8 rel begin segment 84 
+    end.y = 0.0 rel begin segment 84 
+    end.z = 3600 rel begin segment 84 
+end segment 
+ 
+segment 85 
+    color = 13 
+    comp_name = Wg13 
+    position_taper = TAPER_LINEAR 
+    begin.x = -12.6 
+    begin.y = -12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 85 
+    end.y = 0.0 rel begin segment 85 
+    end.z = 2500 rel begin segment 85 
+end segment 
+ 
+segment 86 
+    color = 13 
+    comp_name = Wg13 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -12.6 
+    begin.y = -12.6 
+    begin.z = 2500.0 
+    end.x = -1.2 rel begin segment 86 
+    end.y = -1.2 rel begin segment 86 
+    end.z = 300.0 rel begin segment 86 
+end segment 
+ 
+segment 87 
+    color = 13 
+    comp_name = Wg13 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -1.2 rel end segment 86 
+    begin.y = -1.2 rel end segment 86 
+    begin.z = 300.0 rel end segment 86 
+    end.x = 1.2 rel begin segment 87 
+    end.y = 1.2 rel begin segment 87 
+    end.z = -300.0 rel begin segment 87 
+end segment 
+ 
+segment 88 
+    color = 13 
+    comp_name = Wg13 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -15 
+    begin.y = -15.0 
+    begin.z = 3100.0 
+    end.x = -60.0 rel begin segment 88 
+    end.y = 0.0 rel begin segment 88 
+    end.z = 18600 rel begin segment 88 
+end segment 
+ 
+segment 89 
+    color = 13 
+    comp_name = Wg13 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -75 
+    begin.y = -15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 89 
+    end.y = 7.5 rel begin segment 89 
+    end.z = 1350.0 rel begin segment 89 
+end segment 
+ 
+segment 90 
+    color = 13 
+    comp_name = Wg13 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 89 
+    begin.y = 7.5 rel end segment 89 
+    begin.z = 1350.0 rel end segment 89 
+    end.x = -0.0 rel begin segment 90 
+    end.y = -7.5 rel begin segment 90 
+    end.z = -1350.0 rel begin segment 90 
+end segment 
+ 
+segment 91 
+    color = 13 
+    comp_name = Wg13 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -75 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 12.0 rel begin segment 91 
+    end.y = 0.0 rel begin segment 91 
+    end.z = 3600 rel begin segment 91 
+end segment 
+ 
+segment 92 
+    color = 14 
+    comp_name = Wg14 
+    position_taper = TAPER_LINEAR 
+    begin.x = -4.2 
+    begin.y = -12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 92 
+    end.y = 0.0 rel begin segment 92 
+    end.z = 2500 rel begin segment 92 
+end segment 
+ 
+segment 93 
+    color = 14 
+    comp_name = Wg14 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -4.2 
+    begin.y = -12.6 
+    begin.z = 2500.0 
+    end.x = -0.4 rel begin segment 93 
+    end.y = -1.2 rel begin segment 93 
+    end.z = 300.0 rel begin segment 93 
+end segment 
+ 
+segment 94 
+    color = 14 
+    comp_name = Wg14 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = -0.4 rel end segment 93 
+    begin.y = -1.2 rel end segment 93 
+    begin.z = 300.0 rel end segment 93 
+    end.x = 0.4 rel begin segment 94 
+    end.y = 1.2 rel begin segment 94 
+    end.z = -300.0 rel begin segment 94 
+end segment 
+ 
+segment 95 
+    color = 14 
+    comp_name = Wg14 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -5 
+    begin.y = -15.0 
+    begin.z = 3100.0 
+    end.x = -30.0 rel begin segment 95 
+    end.y = 0.0 rel begin segment 95 
+    end.z = 18600 rel begin segment 95 
+end segment 
+ 
+segment 96 
+    color = 14 
+    comp_name = Wg14 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = -35 
+    begin.y = -15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 96 
+    end.y = 7.5 rel begin segment 96 
+    end.z = 1350.0 rel begin segment 96 
+end segment 
+ 
+segment 97 
+    color = 14 
+    comp_name = Wg14 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 96 
+    begin.y = 7.5 rel end segment 96 
+    begin.z = 1350.0 rel end segment 96 
+    end.x = -0.0 rel begin segment 97 
+    end.y = -7.5 rel begin segment 97 
+    end.z = -1350.0 rel begin segment 97 
+end segment 
+ 
+segment 98 
+    color = 14 
+    comp_name = Wg14 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = -35 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = 5.6 rel begin segment 98 
+    end.y = 0.0 rel begin segment 98 
+    end.z = 3600 rel begin segment 98 
+end segment 
+ 
+segment 99 
+    color = 0 
+    comp_name = Wg15 
+    position_taper = TAPER_LINEAR 
+    begin.x = 4.2 
+    begin.y = -12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 99 
+    end.y = 0.0 rel begin segment 99 
+    end.z = 2500 rel begin segment 99 
+end segment 
+ 
+segment 100 
+    color = 0 
+    comp_name = Wg15 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 4.2 
+    begin.y = -12.6 
+    begin.z = 2500.0 
+    end.x = 0.4 rel begin segment 100 
+    end.y = -1.2 rel begin segment 100 
+    end.z = 300.0 rel begin segment 100 
+end segment 
+ 
+segment 101 
+    color = 0 
+    comp_name = Wg15 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.4 rel end segment 100 
+    begin.y = -1.2 rel end segment 100 
+    begin.z = 300.0 rel end segment 100 
+    end.x = -0.4 rel begin segment 101 
+    end.y = 1.2 rel begin segment 101 
+    end.z = -300.0 rel begin segment 101 
+end segment 
+ 
+segment 102 
+    color = 0 
+    comp_name = Wg15 
+    position_taper = TAPER_LINEAR 
+    begin.x = 5 
+    begin.y = -15.0 
+    begin.z = 3100.0 
+    end.x = 0.0 rel begin segment 102 
+    end.y = 0.0 rel begin segment 102 
+    end.z = 18600 rel begin segment 102 
+end segment 
+ 
+segment 103 
+    color = 0 
+    comp_name = Wg15 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 5 
+    begin.y = -15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 103 
+    end.y = 7.5 rel begin segment 103 
+    end.z = 1350.0 rel begin segment 103 
+end segment 
+ 
+segment 104 
+    color = 0 
+    comp_name = Wg15 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 103 
+    begin.y = 7.5 rel end segment 103 
+    begin.z = 1350.0 rel end segment 103 
+    end.x = -0.0 rel begin segment 104 
+    end.y = -7.5 rel begin segment 104 
+    end.z = -1350.0 rel begin segment 104 
+end segment 
+ 
+segment 105 
+    color = 0 
+    comp_name = Wg15 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 5 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -0.8 rel begin segment 105 
+    end.y = 0.0 rel begin segment 105 
+    end.z = 3600 rel begin segment 105 
+end segment 
+ 
+segment 106 
+    color = 1 
+    comp_name = Wg16 
+    position_taper = TAPER_LINEAR 
+    begin.x = 12.6 
+    begin.y = -12.6 
+    begin.z = 0 
+    end.x = 0.0 rel begin segment 106 
+    end.y = 0.0 rel begin segment 106 
+    end.z = 2500 rel begin segment 106 
+end segment 
+ 
+segment 107 
+    color = 1 
+    comp_name = Wg16 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 12.6 
+    begin.y = -12.6 
+    begin.z = 2500.0 
+    end.x = 1.2 rel begin segment 107 
+    end.y = -1.2 rel begin segment 107 
+    end.z = 300.0 rel begin segment 107 
+end segment 
+ 
+segment 108 
+    color = 1 
+    comp_name = Wg16 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 1.2 rel end segment 107 
+    begin.y = -1.2 rel end segment 107 
+    begin.z = 300.0 rel end segment 107 
+    end.x = -1.2 rel begin segment 108 
+    end.y = 1.2 rel begin segment 108 
+    end.z = -300.0 rel begin segment 108 
+end segment 
+ 
+segment 109 
+    color = 1 
+    comp_name = Wg16 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 15 
+    begin.y = -15.0 
+    begin.z = 3100.0 
+    end.x = 30.0 rel begin segment 109 
+    end.y = 0.0 rel begin segment 109 
+    end.z = 18600 rel begin segment 109 
+end segment 
+ 
+segment 110 
+    color = 1 
+    comp_name = Wg16 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_IANGLE 
+    arc_iangle = 0 
+    begin.x = 45 
+    begin.y = -15.0 
+    begin.z = 21700.0 
+    end.x = 0.0 rel begin segment 110 
+    end.y = 7.5 rel begin segment 110 
+    end.z = 1350.0 rel begin segment 110 
+end segment 
+ 
+segment 111 
+    color = 1 
+    comp_name = Wg16 
+    position_taper = TAPER_USER_1 
+    position_y_taper = TAPER_USER_1 
+    arc_type = ARC_FANGLE 
+    arc_fangle = 0 
+    begin.x = 0.0 rel end segment 110 
+    begin.y = 7.5 rel end segment 110 
+    begin.z = 1350.0 rel end segment 110 
+    end.x = -0.0 rel begin segment 111 
+    end.y = -7.5 rel begin segment 111 
+    end.z = -1350.0 rel begin segment 111 
+end segment 
+ 
+segment 112 
+    color = 1 
+    comp_name = Wg16 
+    position_taper = TAPER_ARC 
+    arc_type = ARC_SBEND 
+    begin.x = 45 
+    begin.y = 0.0 
+    begin.z = 24400.0 
+    end.x = -7.2 rel begin segment 112 
+    end.y = 0.0 rel begin segment 112 
+    end.z = 3600 rel begin segment 112 
+end segment 
+ 
+pathway 1 
+    1
+    3
+    4
+    6
+    7
+end pathway 
+
+pathway 2 
+ 
+    8
+    10
+    11
+    13
+    14
+end pathway 
+
+pathway 3 
+ 
+    15
+    17
+    18
+    20
+    21
+end pathway 
+
+pathway 4 
+ 
+    22
+    24
+    25
+    27
+    28
+end pathway 
+
+pathway 5 
+ 
+    29
+    31
+    32
+    34
+    35
+end pathway 
+
+pathway 6 
+ 
+    36
+    38
+    39
+    41
+    42
+end pathway 
+
+pathway 7 
+ 
+    43
+    45
+    46
+    48
+    49
+end pathway 
+
+pathway 8 
+ 
+    50
+    52
+    53
+    55
+    56
+end pathway 
+
+pathway 9 
+ 
+    57
+    59
+    60
+    62
+    63
+end pathway 
+
+pathway 10 
+ 
+    64
+    66
+    67
+    69
+    70
+end pathway 
+
+pathway 11 
+ 
+    71
+    73
+    74
+    76
+    77
+end pathway 
+
+pathway 12 
+ 
+    78
+    80
+    81
+    83
+    84
+end pathway 
+
+pathway 13 
+ 
+    85
+    87
+    88
+    90
+    91
+end pathway 
+
+pathway 14 
+ 
+    92
+    94
+    95
+    97
+    98
+end pathway 
+
+pathway 15 
+ 
+    99
+    101
+    102
+    104
+    105
+end pathway 
+
+pathway 16 
+ 
+    106
+    108
+    109
+    111
+    112
+end pathway 
+
+monitor 1 
+    pathway 1 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 2 
+    pathway 2 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 3 
+    pathway 3 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 4 
+    pathway 4 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 5 
+    pathway 5 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 6 
+    pathway 6 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 7 
+    pathway 7 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 8 
+    pathway 8 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 9 
+    pathway 9 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 10 
+    pathway 10 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 11 
+    pathway 11 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 12 
+    pathway 12 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 13 
+    pathway 13 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 14 
+    pathway 14 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 15 
+    pathway 15 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
+monitor 16 
+    pathway 16 
+    monitor_type = MONITOR_WG_POWER 
+end monitor 
+ 
