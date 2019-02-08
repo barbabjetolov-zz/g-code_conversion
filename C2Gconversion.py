@@ -15,7 +15,7 @@ from init_parse import init_parse
 
 '''
 TODO:
--add correction for laser head acceleration
+-check if the code works
 '''
 
 '''
@@ -57,6 +57,10 @@ Print of incipit
 '''
 if VERBOSE == 1:
     print('RSOFT-CAD to G_CODE conversion script\n')
+    print('Copyright (c) 2019 Edoardo Rizzardi | Released under MIT license\n')
+
+if VERBOSE == 1:
+    print('Processing file \'%s\'\n'%dicinit['input'])
 
 '''
 Parsing of the CAD file. It returns:
@@ -141,6 +145,8 @@ Prints one full waveguide at a time
 '''
 for n,segment in enumerate(seg):
 
+    output.write('\n//printing section %d\n'%(n+1))
+
     b_e = [eval(segment['begin.x']),eval(segment['end.x']),
            eval(segment['begin.y']),eval(segment['end.y']),
            eval(segment['begin.z']),eval(segment['end.z'])]
@@ -148,9 +154,12 @@ for n,segment in enumerate(seg):
     if n == 0:
         bfr = b_e
 
-    output.write('LINEAR X %f Y %f Z %f F $SPEED\n'%(b_e[0] - bfr[0], ref_index*(b_e[2] - bfr[2]), b_e[4] - bfr[4]))
+    if n != 0:
+        #brings the laser head at the beginning of the segment (does this really work?)
+        output.write('//returns the head at the beginning of the segment\n')
+        output.write('LINEAR X %f Y %f Z %f F $SPEED\n'%(b_e[0] - bfr[0], ref_index*(b_e[2] - bfr[2]), b_e[4] - bfr[4]))
 
-    bfr = b_e
+
 
     distx = b_e[0] - b_e[1]
     disty = b_e[3] - b_e[2]
@@ -164,11 +173,15 @@ for n,segment in enumerate(seg):
 
     #adds laser head acceleration correction at the beginning of the waveguide
     if b_e[4] == 0:
-        output.write(' LINEAR X 0 Y 0 Z -%f F $SPEED\n'%acc_correction)
+    #if dicinit['acc_correction'] in dicinit:
+        output.write('//moves the head before acc correction\n')
+        output.write('LINEAR X 0 Y 0 Z -%f F $SPEED\n'%acc_correction)
         output.write('$do1.x = 1\n\n') #opens shutter
-        output.write(' LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
+        output.write('//acceleration correction\n')
+        output.write('LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
 
     if 'position_taper' and 'position_y_taper' not in segment:
+        output.write('\n//print line\n')
         gcc.print_line(output,segment,ref_index)
 
     else:
@@ -179,14 +192,19 @@ for n,segment in enumerate(seg):
         for it in ut:
             if it['number'] == segment['position_taper']:
                 expression = it['expression']
-
+        output.write('\n//print interpolated function\n')
         gcc.interpolation(linearx,expression,segment,eval(dicinit['dz']),output,ref_index)
-
+        output.write('\n//end interpolated function\n')
     #adds laser head acceleration compensation at the end of the waveguide
-    if seg[n+1]['begin.z'] == '0':
+    try:
+        if seg[n+1]['begin.z'] == '0':
+            output.write('\n//accel correction at the end\n')
+            output.write('LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
+            output.write('\n$do1.x = 0\n') #closes shutter
+    except IndexError: #prints this line anyway, but only if the printed segment is the very last
+        output.write('\n//accel correction at the end\n')
         output.write('LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
         output.write('\n$do1.x = 0\n') #closes shutter
-
 
     #finalizes 'while' loop
     output.write('$SCAN = $SCAN + 1\n')
