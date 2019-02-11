@@ -2,9 +2,10 @@ import numpy as np
 import sys
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import pydoc
 
 #import single math functions (the easiest way)
-from math import sin, cos
+#from math import sin, cos, tan, asin, acos, atan, sqrt
 from numpy import pi
 
 #custom modules
@@ -13,10 +14,8 @@ import ind_tools
 import gcode_conversion as gcc
 from init_parse import init_parse
 
-'''
-TODO:
--check if the code works
-'''
+#needed later
+functions = []
 
 '''
 Check for options
@@ -46,6 +45,14 @@ for n,i in enumerate(sys.argv):
     else:
         VERBOSE = 1
 
+    '''
+    Debug
+    '''
+    if i == '-d' or i == '--debug':
+        DEBUG = 1
+    else:
+        DEBUG = 0
+
 '''
 Sets input and output files
 '''
@@ -56,8 +63,8 @@ output = open(dicinit['output'],'w')
 Print of incipit
 '''
 if VERBOSE == 1:
-    print('RSOFT-CAD to G_CODE conversion script\n')
-    print('Copyright (c) 2019 Edoardo Rizzardi | Released under MIT license\n')
+    print('\nRSOFT-CAD to G_CODE conversion script\n')
+    print('Released under MIT license\n')
 
 if VERBOSE == 1:
     print('Processing file \'%s\'\n'%dicinit['input'])
@@ -74,23 +81,41 @@ param, ut, seg = ind_tools.cad_parser(input)
 Converts the dictionary entries corresponding to the first section of the .ind file
 to variables. It's needed by the eval() function
 '''
-for i in range(0,4):
-    for i in list(param):
+
+for i in range(4):
+    for content in list(param):
         try:
-            exec('%s = %s'%(i,param[i]))
-            del param[i]
-        except NameError:
-            continue
+            exec('%s = %s'%(content,param[content]))
+        except NameError as ne:
+            ne = str(ne).split('\'')[1]
+
+            '''
+            We have three possibilities about the nature of the missing name:
+            1)Is a mathematical function that needs to be imported
+            2)Is a variable just placed further down the .ind file
+            3)Is an irrelevant string that can be discarded
+            '''
+
+            try:
+                #case 1)
+                functions.append(ne)
+                exec('from math import %s'%ne)
+            except ImportError:
+                #case 2) and 3). Just 'pass' is enough
+                pass
+
 
 '''
 Converts extremes of segments from symbolic expression to number
-and associates a segment with its user_taper function
 '''
 for n,segment in enumerate(seg):
     for i in segment:
         first = i.split('_')[0]
         if first == 'position':
-            segment[i] = segment[i].split('_')[2]
+            try:
+                segment[i] = segment[i].split('_')[2]
+            except IndexError:
+                continue
         elif first.split('.')[0] == 'end' or first.split('.')[0] == 'begin':
             try:
                 ind = eval(segment[i].split(' ')[5])
@@ -103,14 +128,72 @@ for n,segment in enumerate(seg):
                 segment[i] = str(eval(segment[i]))
 
 '''
-Simple selection sorting algorithm - scales like n^2, change for larger arrays
+The same with user_taper functions. This procedure is divided in N parts:
+1. Strip the expression from all the mathematical symbols (i.e. (,),+,-,*,/)
+2.
 '''
-ind_tools.sel_sorting(seg,'begin.y')
+
+for t in ut:
+
+    expr = t['expression']
+    for i in expr:
+        expr = expr.replace('z',' ')
+        if i == '(' or i == ')' or i == '+' or i == '-' or i == '*' or i == '/':
+            expr = expr.replace(i,' ')
+        expr = expr.replace('  ',' ')
+        expr_ls = expr.split(' ')
+
+
+    #strip the list from spaces, numbers and mathematical functions
+    expr_ls = [x for x in expr_ls if (bool(x) == True)]
+    expr_ls = [x for x in expr_ls if not x.isdigit()]
+
+    #print(expr_ls)
+
+    for e in expr_ls:
+        if e in functions:
+            continue
+        else:
+            #print(e,str(eval(e)))
+            t['expression'] = t['expression'].replace(e,str(eval(e)))
+
 
 '''
 Reconstructing the waveguides
 '''
-ind_tools.wg_reconstruction(seg)
+begins = ind_tools.wg_reconstruction(seg)
+
+#seg[0], seg[int(begins[0]['number'])-1] = seg[int(begins[0]['number'])-1], seg[0]
+if DEBUG==1:
+    print(begins[0],seg[0])
+
+#exit(-1)
+'''
+little debug feature, to see if the .ind file is written correctly
+'''
+
+index = 0
+for j, segj in enumerate(seg):
+        for k,segk in enumerate(seg[n:]):
+            condition = (segk['begin.x'] == segj['end.x'] and
+                         segk['begin.y'] == segj['end.y'] and
+                         segk['begin.z'] == segj['end.z'])
+
+            if condition:
+                if DEBUG == 1:
+                    print(condition)
+                    #print(segj['end.x'],segj['end.y'],segj['end.z'])
+                    #print(segk['begin.x'],segk['begin.y'],segk['begin.z'])
+                index += 1
+                break
+
+if index == 0 and len(begins) != len(seg):
+    print('.ind file error. Abort.')
+    exit(-1)
+
+#print([s for s in seg if s['number'] == '2'])
+#print([s for s in seg if s['number'] == '9'])
+
 
 '''
 Printing of declaration of variables on the gcode file
@@ -138,15 +221,43 @@ output.write('$SCAN = 0\n')
 ref_index = float(dicinit['ref_index'])
 acc_correction = float(dicinit['acc_correction'])
 
+
 '''
 Most important part of the script: printing segments on file
 It begins from the lower ones (lower y) and continues with the upper ones
 Prints one full waveguide at a time
 '''
-for n,segment in enumerate(seg):
 
-    output.write('///////////////\n//printing section %d\n////////////////\n'%(n+1))
+index = 0
 
+for n,beg in enumerate(begins):
+
+    paragon = beg
+
+    gcc.print_acceleration_correction_beginning(acc_correction,output)
+    print('Print section nr. %s - beginning'%beg['number'])
+    gcc.print_segment(paragon,ut,dicinit,ref_index,acc_correction,output)
+
+
+    index += 1
+
+    for j,segment in enumerate(seg):
+
+        condition = (segment['begin.x'] == paragon['end.x'] and
+                     segment['begin.y'] == paragon['end.y'] and
+                     segment['begin.z'] == paragon['end.z'])
+        if condition:
+            #print(condition)
+            paragon = segment
+            print('Print section nr. %s'%segment['number'])
+            gcc.print_segment(paragon,ut,dicinit,ref_index,acc_correction,output)
+            break
+    else:
+        gcc.print_acceleration_correction_end(acc_correction,output)
+
+        #exit(-1)
+        #output.write('///////////////\n//Printing section %d\n////////////////\n'%(j*len(seg)+k))
+    '''
     b_e = [eval(segment['begin.x']),eval(segment['end.x']),
            eval(segment['begin.y']),eval(segment['end.y']),
            eval(segment['begin.z']),eval(segment['end.z'])]
@@ -156,7 +267,7 @@ for n,segment in enumerate(seg):
 
     if n != 0:
         #brings the laser head at the beginning of the segment (does this really work?)
-        output.write('//returns the head at the beginning of the segment\n')
+        output.write('\n//returns the head at the beginning of the segment\n')
         output.write('LINEAR X %f Y %f Z %f F $SPEED\n'%(b_e[0] - bfr[0], ref_index*(b_e[2] - bfr[2]), b_e[4] - bfr[4]))
 
 
@@ -166,7 +277,7 @@ for n,segment in enumerate(seg):
     distz = b_e[5] - b_e[4]
 
     if VERBOSE==1:
-        print('Outputting section n. %d.'%(n+1))
+        print('Printing section n. %d.'%(n+1))
 
 
     #begin 'while' loop and open shutter
@@ -211,8 +322,8 @@ for n,segment in enumerate(seg):
 
     #finalizes 'while' loop
     output.write('$SCAN = $SCAN + 1\n')
-    output.write('LINEAR X -%f Y -%f Z -%f\n'%(distz,disty,distx))
+    #output.write('LINEAR X -%f Y -%f Z -%f\n'%(distz,disty,distx))
     output.write('LINEAR Y $SCANSTEP F 0.1\n')
     output.write('END WHILE\n')
-
+    '''
 output.write('ABORT X Y Z\n')

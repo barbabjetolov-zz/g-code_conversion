@@ -20,7 +20,7 @@ def import_variables(content):
     for c in content:
         if bool(c) != False:
             try:
-                dict_content[c.split(' ')[0]] = c.split(' ')[2]
+                dict_content[c.split(' ')[0]] = c.split(' ')[2].replace('^','**')
             except IndexError:
                 break
     return dict_content
@@ -53,7 +53,8 @@ def find_expressions(content,taper,list_of_ut):
             k=k+1
             s=content[k].split(' ')[0]
             if s=='expression':
-                temp[s] = content[k].split(' ')[2]
+                #substitutes all the syntax python doesn't understand
+                temp[s] = content[k].split(' ')[2].replace('^','**')
                 break
         list_of_ut.append(temp)
     return list_of_ut
@@ -63,7 +64,7 @@ def find_segment_content(content,segment,list_of_seg):
         temp = {}
         k=index
         temp['number'] = content[k].split(' ')[1]
-        k=index+1;
+        k=index+1
         while content[k] != 'end segment':
             temp[content[k].split(' ')[0]] = content[k].split('=')[1]
             k=k+1
@@ -113,10 +114,16 @@ Function reconstructing waveguides
 This function reorders the list of dictionaries such that contiguous sections are adiacent
 '''
 def wg_reconstruction(list_of_seg):
-    for n,segment in enumerate(list_of_seg):
-        for i in range(n,len(list_of_seg)):
-            statement = (list_of_seg[i]['begin.x'] == segment['end.x'] and
-                         list_of_seg[i]['begin.y'] == segment['end.y'] and
-                         list_of_seg[i]['begin.z'] == segment['end.z'])
-            if statement:
-                list_of_seg[n+1] = list_of_seg[i]
+    begins = []
+    #saves the first segment of every waveguide
+    for segment in list_of_seg:
+        if float(segment['begin.z']) == 0:
+            begins.append(segment)
+    print('\nFound %d waveguide/s\n'%len(begins))
+    #sorts the beginning segments by y
+    sel_sorting(begins,'begin.y')
+
+
+    #list_of_seg[0], list_of_seg[int(begins[0]['number'])-1] = list_of_seg[int(begins[0]['number'])-1], list_of_seg[0]
+
+    return begins
