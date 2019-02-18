@@ -11,6 +11,7 @@ x and z axis are exchanged, because of differences in notation between CAD and t
 def interpolation(linear,expression,segment,dz,file,ref_index):
     bz = eval(segment['begin.z'])
     ez = eval(segment['end.z'])
+    zi = xi = yi = 0
     for i in np.arange(bz,ez+dz,dz): #ez+dz is needed in order for the loop to stop at 'ez'
         z = i
         x = z*linear
@@ -22,7 +23,6 @@ def interpolation(linear,expression,segment,dz,file,ref_index):
             y = eval(expression)
         except ValueError as ve:
             print(ve)
-        zi = xi = yi = 0
         if i!=0:
             #Saves the first set of coordinates and prints linear movements
             file.write('LINEAR X %f Y %f Z %f F $SPEED\n'%(z-zi,ref_index*(y-yi),x-xi))
@@ -54,6 +54,8 @@ def print_acceleration_correction_end(acc_correction,output):
     output.write('$do1.x = 0\n\n') #closes shutter
 
 def print_segment(segment,ut,dicinit,ref_index,acc_correction,output):
+
+    output.write('\n\n/////Printing section %s////////\n\n'%segment['number'])
 
     if ('position_taper' and 'position_y_taper' not in segment) or segment['position_taper'] == 'TAPER_LINEAR':
         #print('\tStraight line.')

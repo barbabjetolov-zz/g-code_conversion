@@ -228,18 +228,15 @@ It begins from the lower ones (lower y) and continues with the upper ones
 Prints one full waveguide at a time
 '''
 
-index = 0
-
 for n,beg in enumerate(begins):
 
     paragon = beg
 
     gcc.print_acceleration_correction_beginning(acc_correction,output)
     print('Print section nr. %s - beginning'%beg['number'])
+    print('%s - %s'%(beg['begin.z'],beg['end.z']))
     gcc.print_segment(paragon,ut,dicinit,ref_index,acc_correction,output)
 
-
-    index += 1
 
     for j,segment in enumerate(seg):
 
@@ -250,80 +247,10 @@ for n,beg in enumerate(begins):
             #print(condition)
             paragon = segment
             print('Print section nr. %s'%segment['number'])
+            print('%s - %s'%(segment['begin.z'],segment['end.z']))
             gcc.print_segment(paragon,ut,dicinit,ref_index,acc_correction,output)
             break
     else:
         gcc.print_acceleration_correction_end(acc_correction,output)
 
-        #exit(-1)
-        #output.write('///////////////\n//Printing section %d\n////////////////\n'%(j*len(seg)+k))
-    '''
-    b_e = [eval(segment['begin.x']),eval(segment['end.x']),
-           eval(segment['begin.y']),eval(segment['end.y']),
-           eval(segment['begin.z']),eval(segment['end.z'])]
-
-    if n == 0:
-        bfr = b_e
-
-    if n != 0:
-        #brings the laser head at the beginning of the segment (does this really work?)
-        output.write('\n//returns the head at the beginning of the segment\n')
-        output.write('LINEAR X %f Y %f Z %f F $SPEED\n'%(b_e[0] - bfr[0], ref_index*(b_e[2] - bfr[2]), b_e[4] - bfr[4]))
-
-
-
-    distx = b_e[0] - b_e[1]
-    disty = b_e[3] - b_e[2]
-    distz = b_e[5] - b_e[4]
-
-    if VERBOSE==1:
-        print('Printing section n. %d.'%(n+1))
-
-
-    #begin 'while' loop and open shutter
-    output.write('WHILE $SCAN LT $NSCANS\n')
-
-    #adds laser head acceleration correction at the beginning of the waveguide
-    if b_e[4] == 0:
-        output.write('//moves the head before acc correction\n')
-        output.write('LINEAR X -%f Y 0 Z 0 F $SPEED\n'%acc_correction)
-        output.write('$do1.x = 1\n\n') #opens shutter
-        output.write('//acceleration correction\n')
-        output.write('LINEAR X %f Y 0 Z 0 F $SPEED\n'%acc_correction)
-
-    if 'position_taper' and 'position_y_taper' not in segment:
-        print('\tStraight line.')
-        output.write('\n//print line\n')
-        gcc.print_line(output,segment,ref_index)
-
-    else:
-        print('\tFollowing taper function n. %s'%segment['position_taper'])
-        #computes the slope of the linear part
-        m = segment['end.x'] + '-' + segment['begin.x'] + '/' + segment['end.z'] + '-' + segment['begin.z']
-        linearx = eval(m)
-
-        #associates the segment with its user_taper function
-        for it in ut:
-            if it['number'] == segment['position_taper']:
-                expression = it['expression']
-        output.write('\n//print interpolated function\n')
-        gcc.interpolation(linearx,expression,segment,eval(dicinit['dz']),output,ref_index)
-        output.write('\n//end interpolated function\n')
-    #adds laser head acceleration compensation at the end of the waveguide
-    try:
-        if seg[n+1]['begin.z'] == '0':
-            output.write('\n//accel correction at the end\n')
-            output.write('LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
-            output.write('\n$do1.x = 0\n') #closes shutter
-    except IndexError: #prints this line anyway, but only if the printed segment is the very last
-        output.write('\n//accel correction at the end\n')
-        output.write('LINEAR X 0 Y 0 Z %f F $SPEED\n'%acc_correction)
-        output.write('\n$do1.x = 0\n') #closes shutter
-
-    #finalizes 'while' loop
-    output.write('$SCAN = $SCAN + 1\n')
-    #output.write('LINEAR X -%f Y -%f Z -%f\n'%(distz,disty,distx))
-    output.write('LINEAR Y $SCANSTEP F 0.1\n')
-    output.write('END WHILE\n')
-    '''
 output.write('ABORT X Y Z\n')
