@@ -18,6 +18,15 @@ from init_parse import init_parse
 functions = []
 
 '''
+To ask Rob:
+1) units
+2) where does the laser head start?
+3) acceleration correction - with or without derivative
+4) what do the while loops do
+5) wether and how to add the $SCANSTEP
+'''
+
+'''
 Check for options
 '''
 for n,i in enumerate(sys.argv):
@@ -79,7 +88,7 @@ param, ut, seg = ind_tools.cad_parser(input)
 
 '''
 Converts the dictionary entries corresponding to the first section of the .ind file
-to variables. It's needed by the eval() function
+to variables. It's needed by the eval() function.
 '''
 
 for i in range(4):
@@ -163,11 +172,9 @@ Reconstructing the waveguides
 '''
 begins = ind_tools.wg_reconstruction(seg)
 
-#seg[0], seg[int(begins[0]['number'])-1] = seg[int(begins[0]['number'])-1], seg[0]
 if DEBUG==1:
     print(begins[0],seg[0])
 
-#exit(-1)
 '''
 little debug feature, to see if the .ind file is written correctly
 '''
@@ -217,8 +224,6 @@ for key, val in gcodeinit.items():
 output.write('\n')
 output.write('$SCAN = 0\n')
 
-#just casting correction values to float, for convenience
-ref_index = float(dicinit['ref_index'])
 acc_correction = float(dicinit['acc_correction'])
 
 
@@ -226,16 +231,26 @@ acc_correction = float(dicinit['acc_correction'])
 Most important part of the script: printing segments on file
 It begins from the lower ones (lower y) and continues with the upper ones
 Prints one full waveguide at a time
+
+---ASSUMES LASER HEAD STARTS AT (0,0,0)---
+
 '''
+
+global paragon
 
 for n,beg in enumerate(begins):
 
     paragon = beg
 
-    gcc.print_acceleration_correction_beginning(acc_correction,output)
+    #moves laser head to begin of segment
+    output.write('\n\n///Moves head to begin of segment///\n\n')
+    output.write('\nLINEAR X %s Y %s*$RIN Z %s F $SPEED\n'%(paragon['begin.z'],paragon['begin.y'],paragon['begin.x']))
+
     print('Print section nr. %s - beginning'%beg['number'])
+    output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
+    gcc.print_acceleration_correction_beginning(acc_correction,output)
     print('%s - %s'%(beg['begin.z'],beg['end.z']))
-    gcc.print_segment(paragon,ut,dicinit,ref_index,acc_correction,output)
+    gcc.print_segment(paragon,ut,dicinit,acc_correction,output)
 
 
     for j,segment in enumerate(seg):
@@ -246,11 +261,16 @@ for n,beg in enumerate(begins):
         if condition:
             #print(condition)
             paragon = segment
+            output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
             print('Print section nr. %s'%segment['number'])
-            print('%s - %s'%(segment['begin.z'],segment['end.z']))
-            gcc.print_segment(paragon,ut,dicinit,ref_index,acc_correction,output)
+            #print('%s - %s'%(segment['begin.z'],segment['end.z']))
+            gcc.print_segment(paragon,ut,dicinit,acc_correction,output)
             break
     else:
         gcc.print_acceleration_correction_end(acc_correction,output)
+        #returns laser head to (0,0,0)
+        output.write('\n\n///Returns to origin///\n\n')
+        output.write('\nLINEAR X -%s Y -%s*$RIN Z -%s F $SPEED\n'%(paragon['end.z'],paragon['end.y'],paragon['end.x']))
 
-output.write('ABORT X Y Z\n')
+
+output.write('\nABORT X Y Z\n')
