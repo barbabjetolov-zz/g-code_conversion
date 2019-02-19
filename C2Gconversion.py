@@ -18,12 +18,10 @@ from init_parse import init_parse
 functions = []
 
 '''
-To ask Rob:
-1) units
-2) where does the laser head start?
-3) acceleration correction - with or without derivative
-4) what do the while loops do
-5) wether and how to add the $SCANSTEP
+TODO
+1) controllare sbend negli esempi
+2) implementare un metodo per cambiare gli assi
+3) riferimento grafico con matplotlib
 '''
 
 '''
