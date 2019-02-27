@@ -123,7 +123,17 @@ def wg_reconstruction(list_of_seg):
     #sorts the beginning segments by y
     sel_sorting(begins,'begin.y')
 
-
-    #list_of_seg[0], list_of_seg[int(begins[0]['number'])-1] = list_of_seg[int(begins[0]['number'])-1], list_of_seg[0]
-
     return begins
+
+'''
+Function that converts the units in the segment to the uno used by the machine
+'''
+def unit_conversion(list_of_seg,conv_factor):
+    for segment in list_of_seg:
+        for key in segment:
+            #converts all the numbers in the segment, except its number and user_taper's
+            if key != 'number' and key != 'position_taper':
+                try:
+                    segment[key] = float(segment[key])*conv_factor
+                except ValueError:
+                    pass

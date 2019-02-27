@@ -612,4 +612,3 @@ launch_field 19
 	launch_position = -2*Ax+1*Bx
 	launch_position_y = -2*Ay+1*By
 end launch_field
-

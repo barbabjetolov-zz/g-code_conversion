@@ -1,7 +1,7 @@
 #init file for extract.py script
 #variables for script
-input = ind/7_7_pl_slit_BP.ind
+input = ind/7core_v1.ind
 output = out.txt
-dz = 1e-1
-ref_index = 1.5
+dz = 1e-3
 acc_correction = 1
+conv_factor = 1e-3
