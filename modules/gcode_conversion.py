@@ -1,6 +1,6 @@
 import sys
 from trigonometry_in_degrees import *
-from numpy import *
+from numpy import pi
 
 '''
 Range for float numbers. Useful for long loops, to avoid memory errors
@@ -30,6 +30,7 @@ def interpolation(expression,segment,dz,axes,file):
     xi=0
 
     expression = expression.replace('z','z/(segment[\'end.z\'] - segment[\'begin.z\'])')
+    print(expression)
 
 
     for i in frange(bz,ez+bz,dz):

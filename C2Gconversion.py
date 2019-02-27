@@ -6,7 +6,8 @@ import numpy
 import sys
 import time
 import os
-from numpy import *
+
+from math import radians
 #from math import radians
 
 #custom modules
@@ -201,15 +202,14 @@ for t in ut:
     expr_ls = [x for x in expr_ls if (bool(x) == True)]
     expr_ls = [x for x in expr_ls if not x.isdigit()]
 
-    print(expr_ls)
-
+#    print(expr_ls)
+    '''
     for e in expr_ls:
         if e in functions:
             continue
         else:
             t['expression'] = t['expression'].replace(e,str(eval(e)))
 
-    '''
     for e in expr_ls:
         if e in functions:
             continue
