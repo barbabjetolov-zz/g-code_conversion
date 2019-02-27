@@ -303,9 +303,7 @@ for n,beg in enumerate(begins):
 
         fig.canvas.draw()
         fig.canvas.flush_events()
-        plt.savefig('frames/frame%d.png'%counter)
-        counter += 1
-        #time.sleep(.5)
+        time.sleep(.5)
 
 
     for j,segment in enumerate(seg):
@@ -328,11 +326,9 @@ for n,beg in enumerate(begins):
                 y = []
                 z = []
 
-                plt.savefig('frames/frame%d.png'%counter)
-                counter += 1
                 fig.canvas.draw()
                 fig.canvas.flush_events()
-                #time.sleep(.5)
+                time.sleep(.5)
 
             break
     else:
