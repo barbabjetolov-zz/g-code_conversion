@@ -23,7 +23,7 @@ Can be manually set in the 'init' file.
 ## Output
 By default the output is set to 'out.txt' file, but can be manually set in the 'init' file.
 
-##Graphics
+## Graphics
 A graphical output is available, via matplotlib. To activate it, launch the script with the arguments
 
 ```
