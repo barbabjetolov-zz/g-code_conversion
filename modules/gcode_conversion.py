@@ -1,6 +1,6 @@
 import sys
-from trigonometrics_in_degrees import *
-from math import pi
+from trigonometry_in_degrees import *
+from numpy import *
 
 '''
 Range for float numbers. Useful for long loops, to avoid memory errors
@@ -29,28 +29,16 @@ def interpolation(expression,segment,dz,axes,file):
     yi=0
     xi=0
 
-    '''
-    Rescaling of the function
-    '''
-    #expressiony = '(' + expression + ')*(segment[\'end.y\'] - segment[\'begin.y\'])'
-    #expressionx = '(' + expression + ')*(segment[\'end.x\'] - segment[\'begin.x\'])'
+    expression = expression.replace('z','z/(segment[\'end.z\'] - segment[\'begin.z\'])')
+
 
     for i in frange(bz,ez+bz,dz):
         z = i
-        x = eval(expression)
-        y = eval(expression)*(segment['end.y'] - segment['begin.y'])
-
         '''
-        try:
-            y = eval(expressiony)
-        except NameError as e:
-            e = str(e).split('\'')[1]
-            exec('from math import %s'%e)
-            y = eval(expression)*segment['end.y']
-        except ValueError as ve:
-            print(ve)
-        ##output.write('%f %f %f\n'%(z,y,x))
+        Rescaling of the function
         '''
+        x = eval(expression)*(segment['end.x'] - segment['begin.x']) + segment['begin.x']
+        y = eval(expression)*(segment['end.y'] - segment['begin.y']) + segment['begin.y']
 
         file.write('LINEAR %s %f %s %f*$RIN %s %f F $SPEED\n'%(axes[0],z-zi,
                                                                axes[1],y-yi,

@@ -2,21 +2,21 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.pyplot import figure
 from itertools import permutations
+import numpy
 import sys
-from math import radians
 import time
+import os
+from numpy import *
+#from math import radians
 
 #custom modules
 sys.path.append('./modules')
 import ind_tools
 import gcode_conversion as gcc
-from trigonometrics_in_degrees import *
 from init_parse import init_parse
+from trigonometry_in_degrees import *
 
-import random
-
-#needed later
-functions = ['sin','cos','tan']
+functions = ['sin','cos','tan','atan','sqrt']
 
 '''
 TODO
@@ -57,16 +57,26 @@ else:
 VERBOSE = 1
 DEBUG = 0
 
+
 '''
-Setting up plots, canvases and data lists
+Setting up plots, canvas and data lists
 '''
 if GRAPHICS:
     plt.ion()
-fig = plt.figure()
-sub1 = fig.add_subplot(221)
-sub2 = fig.add_subplot(222)
-sub3 = fig.add_subplot(223)
+counter=0
 
+fig,axs = plt.subplots(2,2,figsize=(10,10))
+
+axs[0,0].set_xlabel(axes[1])
+axs[0,0].set_ylabel(axes[0])
+axs[0,1].set_xlabel(axes[2])
+axs[0,1].set_ylabel(axes[0])
+axs[1,0].set_xlabel(axes[1])
+axs[1,0].set_ylabel(axes[2])
+
+axs[-1, -1].axis('off')
+
+colors = ['b','g','r','c','m','y','k','w']
 
 x = []
 y = []
@@ -139,8 +149,6 @@ for i in range(4):
                 pass
             '''
 
-
-
 '''
 Converts extremes of segments from symbolic expression to number
 '''
@@ -193,9 +201,15 @@ for t in ut:
     expr_ls = [x for x in expr_ls if (bool(x) == True)]
     expr_ls = [x for x in expr_ls if not x.isdigit()]
 
-    #print(expr_ls)
+    print(expr_ls)
 
+    for e in expr_ls:
+        if e in functions:
+            continue
+        else:
+            t['expression'] = t['expression'].replace(e,str(eval(e)))
 
+    '''
     for e in expr_ls:
         if e in functions:
             continue
@@ -205,36 +219,8 @@ for t in ut:
             except NameError as ie:
                 ie = str(ie).split('\'')[1]
                 exec('from math import %s'%ie)
+    '''
 
-for t in ut:
-    t['expression'] = t['expression'].replace('z','(z/(segment[\'end.z\'] - segment[\'begin.z\']))')
-    t['expression'] = '(' + t['expression'] + ')*(segment[\'end.y\'] - segment[\'begin.y\'])'
-
-
-'''
-little debug feature, to see if the .ind file is written correctly
-'''
-'''
-index = 0
-for j, segj in enumerate(seg):
-        for k,segk in enumerate(seg[n:]):
-            condition = (segk['begin.x'] == segj['end.x'] and
-                         segk['begin.y'] == segj['end.y'] and
-                         segk['begin.z'] == segj['end.z'])
-
-            if condition:
-                if DEBUG == 1:
-                    print(condition)
-                    #print(segj['end.x'],segj['end.y'],segj['end.z'])
-                    #print(segk['begin.x'],segk['begin.y'],segk['begin.z'])
-                index += 1
-                break
-
-
-#if index == 0 and len(begins) != len(seg):
-#    print('.ind file error. Abort.')
- #    exit(-1)
-'''
 
 '''
 Reconstructing the waveguides
@@ -244,37 +230,6 @@ by counting the segments having begin.z = 0
 begins = ind_tools.wg_reconstruction(seg)
 
 
-'''
-xi = []
-yi = []
-xf = []
-yf = []
-lines = []
-
-not_begins = [x for x in seg if x['begin.z'] != 0]
-
-import numpy as np
-#exit(-1)
-
-fig = plt.figure()
-plt.xlabel('transversal - x')
-plt.ylabel('depth - y')
-for b in not_begins:
-    print(b['number'],b['end.z'],b['end.y'],b['end.x'])
-    xi.append(b['begin.x'])
-    yi.append(b['begin.y'])
-    xf.append(b['end.x'])
-    yf.append(b['end.y'])
-
-
-
-plt.plot(xi,yi,'ro',label='begin')
-plt.plot(xf,yf,'bo',label='end')
-plt.legend(loc='upper right')
-plt.show()
-
-exit(-1)
-'''
 '''
 Printing of declaration of variables on the gcode file
 '''
@@ -300,9 +255,6 @@ output.write('$SCAN = 0\n')
 acc_correction = float(dicinit['acc_correction'])
 
 
-
-
-
 '''
 Most important part of the script: printing segments on file
 It begins from the lower ones (lower y) and continues with the upper ones
@@ -324,7 +276,7 @@ for n,beg in enumerate(begins):
                                                                axes[1],paragon['begin.y'],
                                                                axes[2],paragon['begin.x']))
 
-    print('Print section nr. %s - beginning'%beg['number'])
+    print('Print section nr. %s'%beg['number'])
     output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
     gcc.print_acceleration_correction_beginning(acc_correction,axes,output)
     x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
@@ -334,22 +286,29 @@ for n,beg in enumerate(begins):
     '''
 
     if GRAPHICS:
-        sub1.plot(z,x,color='green',linewidth=1)
-        sub2.plot(y,x,color='red',linewidth=1)
-        sub3.plot(z,y,color='blue',linewidth=50)
+        '''
+        sub1.plot(z,x,color=colors[n%len(colors)],linewidth=1)
+        sub2.plot(y,x,color=colors[n%len(colors)],linewidth=1)
+        sub3.plot(z,y,color=colors[n%len(colors)],linewidth=1)
+        '''
+        axs[0,0].plot(z,x,color=colors[n%len(colors)],linewidth=1)
+        axs[0,1].plot(y,x,color=colors[n%len(colors)],linewidth=1)
+        axs[1,0].plot(z,y,color=colors[n%len(colors)],linewidth=1)
+
 
         x = []
         y = []
         z = []
 
+
         fig.canvas.draw()
         fig.canvas.flush_events()
-
-        time.sleep(.5)
+        plt.savefig('frames/frame%d.png'%counter)
+        counter += 1
+        #time.sleep(.5)
 
 
     for j,segment in enumerate(seg):
-
         condition = (segment['begin.x'] == paragon['end.x'] and
                      segment['begin.y'] == paragon['end.y'] and
                      segment['begin.z'] == paragon['end.z'])
@@ -360,17 +319,20 @@ for n,beg in enumerate(begins):
             x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
 
             if GRAPHICS:
-                sub1.plot(z,x,color='green',linewidth=1)
-                sub2.plot(y,x,color='red',linewidth=1)
-                sub3.plot(z,y,'bo')
+                axs[0,0].plot(z,x,color=colors[n%len(colors)],linewidth=1)
+                axs[0,1].plot(y,x,color=colors[n%len(colors)],linewidth=1)
+                axs[1,0].plot(z,y,color=colors[n%len(colors)],linewidth=1)
+
 
                 x = []
                 y = []
                 z = []
 
+                plt.savefig('frames/frame%d.png'%counter)
+                counter += 1
                 fig.canvas.draw()
                 fig.canvas.flush_events()
-                time.sleep(.5)
+                #time.sleep(.5)
 
             break
     else:
@@ -390,4 +352,4 @@ output.write('\nABORT X Y Z\n')
 '''
 Waits for user input to end the script
 '''
-input('\nPress any key to end script.')
+input('\nPress ENTER to end script.')
