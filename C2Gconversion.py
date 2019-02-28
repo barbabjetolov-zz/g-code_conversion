@@ -303,6 +303,7 @@ for n,beg in enumerate(begins):
         fig.canvas.draw()
         fig.canvas.flush_events()
 
+
     x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
 
     '''
@@ -319,6 +320,7 @@ for n,beg in enumerate(begins):
 
         fig.canvas.draw()
         fig.canvas.flush_events()
+
 
 
     for j,segment in enumerate(seg):
