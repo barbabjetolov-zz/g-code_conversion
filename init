@@ -1,6 +1,6 @@
 #init file for extract.py script
 #variables for script
-input = ind/3_del.ind
+input = ind/7core_v1.ind
 output = out.txt
 dz = 1e-3
 acc_correction = 1

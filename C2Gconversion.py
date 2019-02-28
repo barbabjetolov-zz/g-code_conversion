@@ -7,8 +7,7 @@ import sys
 import time
 import os
 
-from math import radians
-#from math import radians
+from numpy import pi
 
 #custom modules
 sys.path.append('./modules')
@@ -21,8 +20,9 @@ functions = ['sin','cos','tan','atan','sqrt']
 
 '''
 TODO
-1) riferimento grafico con matplotlib - IMPORTANTE
-2) finire opzioni
+1) mettere grafica in modulo a sé stante
+2) migliorare parsing expression - usare modulo esterno per variabili
+3) finire opzioni
 '''
 
 '''
@@ -77,7 +77,8 @@ axs[1,0].set_ylabel(axes[2])
 
 axs[-1, -1].axis('off')
 
-colors = ['b','g','r','c','m','y','k','w']
+#all colors except black - it's reserved for acceleration corrections
+colors = ['b','g','r','c','m','y']
 
 x = []
 y = []
@@ -203,13 +204,12 @@ for t in ut:
     expr_ls = [x for x in expr_ls if not x.isdigit()]
 
 #    print(expr_ls)
-    '''
     for e in expr_ls:
         if e in functions:
             continue
         else:
             t['expression'] = t['expression'].replace(e,str(eval(e)))
-
+    '''
     for e in expr_ls:
         if e in functions:
             continue
@@ -279,22 +279,21 @@ for n,beg in enumerate(begins):
     print('Print section nr. %s'%beg['number'])
     output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
     gcc.print_acceleration_correction_beginning(acc_correction,axes,output)
-    x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
 
     '''
-    Outputs the segment on screen via matplotlib
+    Output acceleration correction on screen
     '''
-
     if GRAPHICS:
-        '''
-        sub1.plot(z,x,color=colors[n%len(colors)],linewidth=1)
-        sub2.plot(y,x,color=colors[n%len(colors)],linewidth=1)
-        sub3.plot(z,y,color=colors[n%len(colors)],linewidth=1)
-        '''
-        axs[0,0].plot(z,x,color=colors[n%len(colors)],linewidth=1)
-        axs[0,1].plot(y,x,color=colors[n%len(colors)],linewidth=1)
-        axs[1,0].plot(z,y,color=colors[n%len(colors)],linewidth=1)
+        x.append(paragon['begin.z'] - acc_correction)
+        x.append(paragon['begin.z'])
+        y.append(paragon['begin.y'])
+        y.append(paragon['begin.y'])
+        z.append(paragon['begin.x'])
+        z.append(paragon['begin.x'])
 
+        axs[0,0].plot(z,x,color='k',linewidth=1)
+        axs[0,1].plot(y,x,color='k',linewidth=1)
+        axs[1,0].plot(z,y,color='k',linewidth=1)
 
         x = []
         y = []
@@ -304,11 +303,30 @@ for n,beg in enumerate(begins):
         fig.canvas.draw()
         fig.canvas.flush_events()
 
+    x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
+
+    '''
+    Output of segment on screen
+    '''
+    if GRAPHICS:
+        axs[0,0].plot(z,x,color=colors[n%len(colors)],linewidth=1)
+        axs[0,1].plot(y,x,color=colors[n%len(colors)],linewidth=1)
+        axs[1,0].plot(z,y,color=colors[n%len(colors)],linewidth=1)
+
+        x = []
+        y = []
+        z = []
+
+        fig.canvas.draw()
+        fig.canvas.flush_events()
+
 
     for j,segment in enumerate(seg):
+
         condition = (segment['begin.x'] == paragon['end.x'] and
                      segment['begin.y'] == paragon['end.y'] and
                      segment['begin.z'] == paragon['end.z'])
+
         if condition:
             paragon = segment
             output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
@@ -328,9 +346,32 @@ for n,beg in enumerate(begins):
                 fig.canvas.draw()
                 fig.canvas.flush_events()
 
-            break
+            #break
+
     else:
+        #print('cacaca')
         gcc.print_acceleration_correction_end(acc_correction,axes,output)
+
+        if GRAPHICS:
+            z.append(paragon['end.z'])
+            z.append(paragon['end.z'] + acc_correction)
+            y.append(paragon['end.y'])
+            y.append(paragon['end.y'])
+            x.append(paragon['end.x'])
+            x.append(paragon['end.x'])
+
+            axs[0,0].plot(x,z,color='k',linewidth=1)
+            axs[0,1].plot(y,z,color='k',linewidth=1)
+            axs[1,0].plot(x,y,color='k',linewidth=1)
+
+            x = []
+            y = []
+            z = []
+
+
+            fig.canvas.draw()
+            fig.canvas.flush_events()
+
         output.write('\n\n///Returns to origin///\n\n')
         output.write('\nLINEAR %s -%s %s -%s %s -%s*$RIN F $SPEED\n'%(axes[0],paragon['end.z'],
                                                                       axes[1],paragon['end.y'],
