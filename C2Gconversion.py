@@ -303,7 +303,6 @@ for n,beg in enumerate(begins):
 
         fig.canvas.draw()
         fig.canvas.flush_events()
-        time.sleep(.5)
 
 
     for j,segment in enumerate(seg):
@@ -328,7 +327,6 @@ for n,beg in enumerate(begins):
 
                 fig.canvas.draw()
                 fig.canvas.flush_events()
-                time.sleep(.5)
 
             break
     else:
