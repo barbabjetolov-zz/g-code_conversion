@@ -39,10 +39,12 @@ def interpolation(expression,segment,dz,axes,file):
         x = eval(expression)*(segment['end.x'] - segment['begin.x']) + segment['begin.x']
         y = eval(expression)*(segment['end.y'] - segment['begin.y']) + segment['begin.y']
 
-        file.write('LINEAR %s %f %s %f*$RIN %s %f F $SPEED\n'%(axes[0],z-zi,
+        '''
+        file.write('LINEAR %s %f %s %f %s %f*$RIN F $SPEED\n'%(axes[0],z-zi,
                                                                axes[1],y-yi,
                                                                axes[2],x-xi))
 
+        '''
         lx.append(z)
         ly.append(y)
         lz.append(x)
@@ -59,7 +61,7 @@ def print_line(file,segment,axes):
               segment['begin.y'],segment['end.y'],
               segment['begin.z'],segment['end.z']]
 
-    file.write('LINEAR %s %f %s %f*$RIN %s %f F $SPEED\n'%(axes[0],limits[5]-limits[4],
+    file.write('LINEAR %s %f %s %f %s %f*$RIN F $SPEED\n'%(axes[0],limits[5]-limits[4],
                                                            axes[1],limits[3]-limits[2],
                                                            axes[2],limits[1]-limits[0]))
 
@@ -71,7 +73,7 @@ Function that prints acceleration correction at the beginning of the waveguide
 def print_acceleration_correction_beginning(acc_correction,axes,output):
     #the head is automatically positioned at the beginning of the first segment
     output.write('//moves the head before acc correction\n')
-    output.write('LINEAR %s -%f %s 0 %s 0 F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2]))
+    output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2]))
     output.write('$do1.x = 1\n\n') #opens shutter
     output.write('//acceleration correction\n')
     output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2]))
@@ -80,7 +82,7 @@ def print_acceleration_correction_end(acc_correction,axes,output):
     output.write('\n//acceleration correction at the end of waveguide//\n')
     output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2]))
     output.write('$do1.x = 0\n\n') #closes shutter
-    output.write('LINEAR %s -%f %s 0 %s 0 F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2]))
+    output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2]))
 
 def print_segment(segment,ut,dicinit,acc_correction,axes,output):
 
@@ -88,14 +90,11 @@ def print_segment(segment,ut,dicinit,acc_correction,axes,output):
     output.write('\n\nWHILE $SCAN LT $NSCAN\n\n')
 
     if ('position_taper' and 'position_y_taper' not in segment) or segment['position_taper'] == 'TAPER_LINEAR':
-        #print(segment['begin.x'],segment['begin.y'],segment['begin.z'])
-        #print(segment['end.x'],segment['end.y'],segment['end.z'])
+
         output.write('\n//print line\n')
         x,y,z = print_line(output,segment,axes)
 
     elif segment['position_taper'] != 'TAPER_ARC':
-        #linearx = (segment['end.x'] - segment['begin.x'])/(segment['end.z'] - segment['begin.z'])
-        #segment['linear'] = linearx
 
         '''
         Associates the segment with its user_taper function
@@ -116,3 +115,10 @@ def print_segment(segment,ut,dicinit,acc_correction,axes,output):
     output.write('ENDWHILE\n\n')
 
     return x,y,z
+
+def points2gcode(dx,y,z,output,axes):
+
+    for i in range(len(y[1:])):
+        output.write('LINEAR %s %f %s %f %s %f F $SPEED\n'%(axes[0],dx,
+                                                            axes[1],y[i+1] - y[i],
+                                                            axes[2],z[i+1] - z[i]))

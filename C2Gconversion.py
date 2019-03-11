@@ -68,12 +68,12 @@ counter=0
 
 fig,axs = plt.subplots(2,2,figsize=(10,10))
 
-axs[0,0].set_xlabel(axes[1])
+axs[0,0].set_xlabel(axes[2])
 axs[0,0].set_ylabel(axes[0])
-axs[0,1].set_xlabel(axes[2])
+axs[0,1].set_xlabel(axes[1])
 axs[0,1].set_ylabel(axes[0])
-axs[1,0].set_xlabel(axes[1])
-axs[1,0].set_ylabel(axes[2])
+axs[1,0].set_xlabel(axes[2])
+axs[1,0].set_ylabel(axes[1])
 
 axs[-1, -1].axis('off')
 
@@ -110,8 +110,8 @@ Messages
 print('The script operates the axis transformation:')
 print('.ind\t  \tgcode')
 print('Z\t->\t%s\tScanning direction'%axes[0])
-print('Y\t->\t%s\tTransversal direction'%axes[1])
-print('X\t->\t%s\tDepth'%axes[2])
+print('Y\t->\t%s\tDepth'%axes[1])
+print('X\t->\t%s\tTransversal direction'%axes[2])
 
 
 
@@ -266,6 +266,10 @@ Prints one full waveguide at a time
 
 global paragon
 
+q = [0.]
+w = [0.]
+e = [0.]
+
 for n,beg in enumerate(begins):
 
     paragon = beg
@@ -291,6 +295,7 @@ for n,beg in enumerate(begins):
         z.append(paragon['begin.x'])
         z.append(paragon['begin.x'])
 
+
         axs[0,0].plot(z,x,color='k',linewidth=1)
         axs[0,1].plot(y,x,color='k',linewidth=1)
         axs[1,0].plot(z,y,color='k',linewidth=1)
@@ -299,12 +304,16 @@ for n,beg in enumerate(begins):
         y = []
         z = []
 
-
         fig.canvas.draw()
         fig.canvas.flush_events()
 
 
+
     x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
+
+    gcc.points2gcode(float(dicinit['dz']),y,z,output,axes)
+
+#    exit(-1)
 
     '''
     Output of segment on screen
@@ -322,7 +331,6 @@ for n,beg in enumerate(begins):
         fig.canvas.flush_events()
 
 
-
     for j,segment in enumerate(seg):
 
         condition = (segment['begin.x'] == paragon['end.x'] and
@@ -335,11 +343,12 @@ for n,beg in enumerate(begins):
             print('Print section nr. %s'%segment['number'])
             x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
 
+            gcc.points2gcode(float(dicinit['dz']),y,z,output,axes)
+
             if GRAPHICS:
                 axs[0,0].plot(z,x,color=colors[n%len(colors)],linewidth=1)
                 axs[0,1].plot(y,x,color=colors[n%len(colors)],linewidth=1)
                 axs[1,0].plot(z,y,color=colors[n%len(colors)],linewidth=1)
-
 
                 x = []
                 y = []
@@ -347,6 +356,8 @@ for n,beg in enumerate(begins):
 
                 fig.canvas.draw()
                 fig.canvas.flush_events()
+
+
 
             #break
 
@@ -361,7 +372,7 @@ for n,beg in enumerate(begins):
             y.append(paragon['end.y'])
             x.append(paragon['end.x'])
             x.append(paragon['end.x'])
-
+            print(x[0],y[0],z[0])
             axs[0,0].plot(x,z,color='k',linewidth=1)
             axs[0,1].plot(y,z,color='k',linewidth=1)
             axs[1,0].plot(x,y,color='k',linewidth=1)
@@ -375,9 +386,9 @@ for n,beg in enumerate(begins):
             fig.canvas.flush_events()
 
         output.write('\n\n///Returns to origin///\n\n')
-        output.write('\nLINEAR %s -%s %s -%s %s -%s*$RIN F $SPEED\n'%(axes[0],paragon['end.z'],
-                                                                      axes[1],paragon['end.y'],
-                                                                      axes[2],paragon['end.x']))
+        output.write('\nLINEAR %s %s %s %s %s %s*$RIN F $SPEED\n'%(axes[0],-paragon['end.z'],
+                                                                   axes[1],-paragon['end.y'],
+                                                                   axes[2],-paragon['end.x']))
 
 
 x = []

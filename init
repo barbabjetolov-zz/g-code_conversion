@@ -1,7 +1,7 @@
 #init file for extract.py script
 #variables for script
-input = ind/7core_v1.ind
+input = ind/73_core.ind
 output = out.txt
-dz = 1e-3
-acc_correction = 1
+dz = 1e-1
+acc_correction = 10
 conv_factor = 1e-3
