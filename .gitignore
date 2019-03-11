@@ -1,5 +1,6 @@
 out.txt
 modules/__pycache__
-./ignore
+modules/param.py
+ignore/
 plot_out.py
 
