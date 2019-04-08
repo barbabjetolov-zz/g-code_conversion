@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.pyplot import figure
 from itertools import permutations
+import argparse
 import numpy
 import sys
 import time
@@ -21,14 +22,12 @@ functions = ['sin','cos','tan','atan','sqrt']
 '''
 TODO
 1) mettere grafica in modulo a sé stante
-2) migliorare parsing expression - usare modulo esterno per variabili
-3) finire opzioni
+2) finire opzioni
 '''
 
 '''
 Check for options
 '''
-
 if '-i' in sys.argv:
     index = sys.argv.index('-i')
     dicinit = init_parse(sys.argv[index+1])
@@ -64,7 +63,7 @@ Setting up plots, canvas and data lists
 '''
 if GRAPHICS:
     plt.ion()
-counter=0
+
 
 fig,axs = plt.subplots(2,2,figsize=(10,10))
 
@@ -77,8 +76,8 @@ axs[1,0].set_ylabel(axes[1])
 
 axs[-1, -1].axis('off')
 
-#all colors except black - it's reserved for acceleration corrections
-colors = ['b','g','r','c','m','y']
+#all colors - except white
+colors = ['b','g','r','c','m','y','k']
 
 x = []
 y = []
@@ -88,7 +87,7 @@ z = []
 '''
 Sets input and output files
 '''
-fin = open(dicinit['input'],'r')
+f_input = open(dicinit['input'],'r')
 output = open(dicinit['output'],'w')
 
 '''
@@ -117,11 +116,11 @@ print('X\t->\t%s\tTransversal direction'%axes[2])
 
 '''
 Parsing of the CAD file. It returns:
-param - dictionary containing the first section of the file
-ut - list of dictionaries with all the user_taper mathematical expressions
-seg - list of dictionaries with the content of each segment section
+paramList - dictionary containing the first section of the file
+usrTaperList - list of dictionaries with all the user_taper mathematical expressions
+segList - list of dictionaries with the content of each segment section
 '''
-param, ut, seg = ind_tools.cad_parser(fin)
+paramList, usrTaperList, segList = ind_tools.cad_parser(f_input)
 
 '''
 Converts the dictionary entries corresponding to the first section of the .ind file
@@ -129,32 +128,17 @@ to variables. It's needed by the eval() function.
 '''
 
 for i in range(4):
-    for content in list(param):
+    for content in list(paramList):
         try:
-            exec('%s = %s'%(content,param[content]))
+            exec('%s = %s'%(content,paramList[content]))
         except NameError as ne:
             ne = str(ne).split('\'')[1]
 
-            '''
-            We have three possibilities about the nature of the missing name:
-            1)Is a mathematical function that needs to be imported
-            2)Is a variable just placed further down the .ind file
-            3)Is an irrelevant string that can be discarded
-            '''
-            '''
-            try:
-                #case 1)
-                #functions.append(ne)
-                #exec('from math import %s'%ne)
-            except ImportError:
-                #case 2) and 3). Just 'pass' is enough
-                pass
-            '''
 
 '''
 Converts extremes of segments from symbolic expression to number
 '''
-for n,segment in enumerate(seg):
+for n,segment in enumerate(segList):
     for i in segment:
         first = i.split('_')[0]
         if first == 'position':
@@ -164,70 +148,32 @@ for n,segment in enumerate(seg):
                 continue
         elif first.split('.')[0] == 'end' or first.split('.')[0] == 'begin':
             try:
-                ind = eval(segment[i].split(' ')[5])
-                pos = segment[i].split(' ')[3]
+                '''
+                Some segment extremes are relative to others
+                This part computes
+                '''
+
                 rel = segment[i].split(' ')[1]
                 ax = i.split('.')[1]
-                pos += '.' + ax
-                segment[i] = str(eval(rel) + eval(seg[ind-1][pos]))
-            except IndexError:
-                segment[i] = str(eval(segment[i]))
+                pos = segment[i].split(' ')[3] + '.' + ax
+                ind = eval(segment[i].split(' ')[5])
 
+                segment[i] = eval(rel) + eval(segList[ind-1][pos])
+            except IndexError:
+                segment[i] = eval(segment[i])
 
 
 '''
 Units conversion
 '''
-ind_tools.unit_conversion(seg,float(dicinit['conv_factor']))
-
-'''
-The same with user_taper functions. This procedure is divided in N parts:
-1. Strip the expression from all the mathematical symbols (i.e. (,),+,-,*,/)
-2. eval() all the variable-dependent expressions, and imports mathematical functions
-'''
-
-for t in ut:
-
-    #t['expression'] = t['expression'].replace('360','2*pi')
-
-    expr = t['expression']
-    for i in expr:
-        expr = expr.replace('z',' ')
-        if i == '(' or i == ')' or i == '+' or i == '-' or i == '*' or i == '/':
-            expr = expr.replace(i,' ')
-        expr = expr.replace('  ',' ')
-        expr_ls = expr.split(' ')
-
-
-    #strip the list from spaces, numbers and mathematical functions
-    expr_ls = [x for x in expr_ls if (bool(x) == True)]
-    expr_ls = [x for x in expr_ls if not x.isdigit()]
-
-#    print(expr_ls)
-    for e in expr_ls:
-        if e in functions:
-            continue
-        else:
-            t['expression'] = t['expression'].replace(e,str(eval(e)))
-    '''
-    for e in expr_ls:
-        if e in functions:
-            continue
-        else:
-            try:
-                t['expression'] = t['expression'].replace(e,str(eval(e)))
-            except NameError as ie:
-                ie = str(ie).split('\'')[1]
-                exec('from math import %s'%ie)
-    '''
-
+#ind_tools.unit_conversion(segList,float(dicinit['conv_factor']))
 
 '''
 Reconstructing the waveguides
 i.e. checks how many waveguides are simulated
 by counting the segments having begin.z = 0
 '''
-begins = ind_tools.wg_reconstruction(seg)
+begins = ind_tools.wg_reconstruction(segList)
 
 
 '''
@@ -309,7 +255,7 @@ for n,beg in enumerate(begins):
 
 
 
-    x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
+    x,y,z = gcc.print_segment(paragon,usrTaperList,dicinit,acc_correction,axes,output)
 
     gcc.points2gcode(float(dicinit['dz']),y,z,output,axes)
 
@@ -331,7 +277,7 @@ for n,beg in enumerate(begins):
         fig.canvas.flush_events()
 
 
-    for j,segment in enumerate(seg):
+    for j,segment in enumerate(segList):
 
         condition = (segment['begin.x'] == paragon['end.x'] and
                      segment['begin.y'] == paragon['end.y'] and
@@ -341,7 +287,7 @@ for n,beg in enumerate(begins):
             paragon = segment
             output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
             print('Print section nr. %s'%segment['number'])
-            x,y,z = gcc.print_segment(paragon,ut,dicinit,acc_correction,axes,output)
+            x,y,z = gcc.print_segment(paragon,usrTaperList,dicinit,acc_correction,axes,output)
 
             gcc.points2gcode(float(dicinit['dz']),y,z,output,axes)
 
@@ -359,10 +305,9 @@ for n,beg in enumerate(begins):
 
 
 
-            #break
+        
 
     else:
-        #print('cacaca')
         gcc.print_acceleration_correction_end(acc_correction,axes,output)
 
         if GRAPHICS:
