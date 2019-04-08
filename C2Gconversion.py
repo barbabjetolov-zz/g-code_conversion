@@ -228,6 +228,10 @@ for n,beg in enumerate(begins):
 
     print('Print section nr. %s'%beg['number'])
     output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
+    '''
+    Initializes while loop
+    '''
+    output.write('WHILE $SCAN LT $SCANNO\n')
     gcc.print_acceleration_correction_beginning(acc_correction,axes,output)
 
     '''
@@ -254,12 +258,9 @@ for n,beg in enumerate(begins):
         fig.canvas.flush_events()
 
 
-
     x,y,z = gcc.print_segment(paragon,usrTaperList,dicinit,acc_correction,axes,output)
 
     gcc.points2gcode(float(dicinit['dz']),y,z,output,axes)
-
-#    exit(-1)
 
     '''
     Output of segment on screen
@@ -305,10 +306,12 @@ for n,beg in enumerate(begins):
 
 
 
-        
+
 
     else:
         gcc.print_acceleration_correction_end(acc_correction,axes,output)
+        output.write('\t$SCAN = $SCAN + 1\n')
+        output.write('ENDWHILE\n')
 
         if GRAPHICS:
             z.append(paragon['end.z'])

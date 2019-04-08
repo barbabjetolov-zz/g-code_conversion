@@ -61,9 +61,10 @@ def print_line(file,segment,axes):
               segment['begin.y'],segment['end.y'],
               segment['begin.z'],segment['end.z']]
 
-    file.write('LINEAR %s %f %s %f %s %f*$RIN F $SPEED\n'%(axes[0],limits[5]-limits[4],
-                                                           axes[1],limits[3]-limits[2],
-                                                           axes[2],limits[1]-limits[0]))
+    file.write('LINEAR %s %f %s %f %s (%f + (%f*$SLOPEX)+(%f*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],limits[5]-limits[4],
+                                                                                         axes[1],limits[3]-limits[2],
+                                                                                         axes[2],limits[1]-limits[0],
+                                                                                         limits[5]-limits[4],limits[3]-limits[2]))
 
     return [segment['end.z'],segment['begin.z']], [segment['begin.y'],segment['end.y']], [segment['begin.x'],segment['end.x']]
 
@@ -72,22 +73,19 @@ Function that prints acceleration correction at the beginning of the waveguide
 '''
 def print_acceleration_correction_beginning(acc_correction,axes,output):
     #the head is automatically positioned at the beginning of the first segment
-    output.write('//moves the head before acc correction\n')
-    output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2]))
-    output.write('$do1.x = 1\n\n') #opens shutter
-    output.write('//acceleration correction\n')
-    output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2]))
+    output.write('\t//moves the head before acc correction\n')
+    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX)*$RIN F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2],-acc_correction))
+    output.write('\t$do1.x = 1\n\n') #opens shutter
+    output.write('\t//acceleration correction\n')
+    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX)*$RIN F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2],-acc_correction))
 
 def print_acceleration_correction_end(acc_correction,axes,output):
-    output.write('\n//acceleration correction at the end of waveguide//\n')
-    output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2]))
-    output.write('$do1.x = 0\n\n') #closes shutter
-    output.write('LINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2]))
+    output.write('\n\t//acceleration correction at the end of waveguide//\n')
+    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX)*$RIN F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2],-acc_correction))
+    output.write('\t$do1.x = 0\n\n') #closes shutter
+    #output.write('\tLINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2]))
 
 def print_segment(segment,ut,dicinit,acc_correction,axes,output):
-
-    #initializing while loop
-    output.write('\n\nWHILE $SCAN LT $NSCAN\n\n')
 
     if ('position_taper' and 'position_y_taper' not in segment) or segment['position_taper'] == 'TAPER_LINEAR':
 
@@ -106,19 +104,17 @@ def print_segment(segment,ut,dicinit,acc_correction,axes,output):
         '''
         Outputs the linear movements composing the functions
         '''
-        output.write('\n//print interpolated function\n')
         x,y,z = interpolation(expression,segment,eval(dicinit['dz']),axes,output)
-        output.write('\n//end interpolated function\n')
 
-    output.write('\n\n$SCAN = $SCAN +1\n')
-    output.write('LINEAR Y $SCANSEP\n')
-    output.write('ENDWHILE\n\n')
 
     return x,y,z
 
 def points2gcode(dx,y,z,output,axes):
 
+    output.write('\n\t//print interpolated function\n')
     for i in range(len(y[1:])):
-        output.write('LINEAR %s %f %s %f %s %f F $SPEED\n'%(axes[0],dx,
-                                                            axes[1],y[i+1] - y[i],
-                                                            axes[2],z[i+1] - z[i]))
+        output.write('\tLINEAR %s %f %s %f %s (%f + (%f*$SLOPEX)+(%f*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],dx,
+                                                                                                 axes[1],y[i+1] - y[i],
+                                                                                                 axes[2],z[i+1] - z[i],
+                                                                                                 dx, y[i+1] - y[i]))
+    output.write('\n\t//end interpolated function\n')
