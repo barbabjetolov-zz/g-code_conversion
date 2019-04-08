@@ -1,0 +1,1491 @@
+
+L = 2000
+alpha = 4e-07
+background_index = 1.4974
+delta = 0.0026
+dimension = 3
+eim = 0
+field_output_format = OUTPUT_REAL_IMAG
+free_space_wavelength = 1.55
+grid_size = 1
+grid_size_y = 1
+height = width
+k0 = (2*pi)/free_space_wavelength
+launch_height = 25
+launch_position = 0
+launch_position_y = 0
+launch_type = LAUNCH_FILE
+launch_width = 25
+sim_tool = ST_BEAMPROP
+slice_display_mode = DISPLAY_NONE
+step_size = 15
+structure = STRUCT_FIBER
+width = 6.2
+
+
+user_taper 1
+	type = UF_EXPRESSION
+	expression = z-sin(360*z)/(2*pi)
+end user_taper
+
+
+segment 1
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 2.391626293
+	begin.y = -178.6988532
+	begin.z = 0
+	end.x = 2.391626293
+	end.y = -1080
+	end.z = L
+end segment
+
+segment 2
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -38.397034
+	begin.y = -174.5413068
+	begin.z = 0
+	end.x = -38.397034
+	end.y = -1050
+	end.z = L
+end segment
+
+segment 3
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 67.1751575
+	begin.y = -149.6111567
+	begin.z = 0
+	end.x = 67.1751575
+	end.y = -1020
+	end.z = L
+end segment
+
+segment 4
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 26.38649721
+	begin.y = -145.4536104
+	begin.z = 0
+	end.x = 26.38649721
+	end.y = -990
+	end.z = L
+end segment
+
+segment 5
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -14.40216308
+	begin.y = -141.296064
+	begin.z = 0
+	end.x = -14.40216308
+	end.y = -960
+	end.z = L
+end segment
+
+segment 6
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -55.19082337
+	begin.y = -137.1385176
+	begin.z = 0
+	end.x = -55.19082337
+	end.y = -930
+	end.z = L
+end segment
+
+segment 7
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -95.97948366
+	begin.y = -132.9809713
+	begin.z = 0
+	end.x = -95.97948366
+	end.y = -900
+	end.z = L
+end segment
+
+segment 8
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 131.9586887
+	begin.y = -120.5234603
+	begin.z = 0
+	end.x = 131.9586887
+	end.y = -870
+	end.z = L
+end segment
+
+segment 9
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 91.17002841
+	begin.y = -116.3659139
+	begin.z = 0
+	end.x = 91.17002841
+	end.y = -840
+	end.z = L
+end segment
+
+segment 10
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 50.38136812
+	begin.y = -112.2083675
+	begin.z = 0
+	end.x = 50.38136812
+	end.y = -810
+	end.z = L
+end segment
+
+segment 11
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 9.592707834
+	begin.y = -108.0508212
+	begin.z = 0
+	end.x = 9.592707834
+	end.y = -780
+	end.z = L
+end segment
+
+segment 12
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -31.19595246
+	begin.y = -103.8932748
+	begin.z = 0
+	end.x = -31.19595246
+	end.y = -750
+	end.z = L
+end segment
+
+segment 13
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -71.98461275
+	begin.y = -99.73572844
+	begin.z = 0
+	end.x = -71.98461275
+	end.y = -720
+	end.z = L
+end segment
+
+segment 14
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -112.773273
+	begin.y = -95.57818208
+	begin.z = 0
+	end.x = -112.773273
+	end.y = -690
+	end.z = L
+end segment
+
+segment 15
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -153.5619333
+	begin.y = -91.42063571
+	begin.z = 0
+	end.x = -153.5619333
+	end.y = -660
+	end.z = L
+end segment
+
+segment 16
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 155.9535596
+	begin.y = -87.27821746
+	begin.z = 0
+	end.x = 155.9535596
+	end.y = -630
+	end.z = L
+end segment
+
+segment 17
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 115.1648993
+	begin.y = -83.12067109
+	begin.z = 0
+	end.x = 115.1648993
+	end.y = -600
+	end.z = L
+end segment
+
+segment 18
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 74.37623904
+	begin.y = -78.96312473
+	begin.z = 0
+	end.x = 74.37623904
+	end.y = -570
+	end.z = L
+end segment
+
+segment 19
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 33.58757875
+	begin.y = -74.80557836
+	begin.z = 0
+	end.x = 33.58757875
+	end.y = -540
+	end.z = L
+end segment
+
+segment 20
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -7.201081541
+	begin.y = -70.64803199
+	begin.z = 0
+	end.x = -7.201081541
+	end.y = -510
+	end.z = L
+end segment
+
+segment 21
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -47.98974183
+	begin.y = -66.49048563
+	begin.z = 0
+	end.x = -47.98974183
+	end.y = -480
+	end.z = L
+end segment
+
+segment 22
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -88.77840212
+	begin.y = -62.33293926
+	begin.z = 0
+	end.x = -88.77840212
+	end.y = -450
+	end.z = L
+end segment
+
+segment 23
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -129.5670624
+	begin.y = -58.1753929
+	begin.z = 0
+	end.x = -129.5670624
+	end.y = -420
+	end.z = L
+end segment
+
+segment 24
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -170.3557227
+	begin.y = -54.01784653
+	begin.z = 0
+	end.x = -170.3557227
+	end.y = -390
+	end.z = L
+end segment
+
+segment 25
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 139.1597702
+	begin.y = -49.87542828
+	begin.z = 0
+	end.x = 139.1597702
+	end.y = -360
+	end.z = L
+end segment
+
+segment 26
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 98.37110995
+	begin.y = -45.71788191
+	begin.z = 0
+	end.x = 98.37110995
+	end.y = -330
+	end.z = L
+end segment
+
+segment 27
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 57.58244966
+	begin.y = -41.56033555
+	begin.z = 0
+	end.x = 57.58244966
+	end.y = -300
+	end.z = L
+end segment
+
+segment 28
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 16.79378937
+	begin.y = -37.40278918
+	begin.z = 0
+	end.x = 16.79378937
+	end.y = -270
+	end.z = L
+end segment
+
+segment 29
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -23.99487092
+	begin.y = -33.24524281
+	begin.z = 0
+	end.x = -23.99487092
+	end.y = -240
+	end.z = L
+end segment
+
+segment 30
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -64.7835312
+	begin.y = -29.08769645
+	begin.z = 0
+	end.x = -64.7835312
+	end.y = -210
+	end.z = L
+end segment
+
+segment 31
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -105.5721915
+	begin.y = -24.93015008
+	begin.z = 0
+	end.x = -105.5721915
+	end.y = -180
+	end.z = L
+end segment
+
+segment 32
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -146.3608518
+	begin.y = -20.77260372
+	begin.z = 0
+	end.x = -146.3608518
+	end.y = -150
+	end.z = L
+end segment
+
+segment 33
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 163.1546412
+	begin.y = -16.63018546
+	begin.z = 0
+	end.x = 163.1546412
+	end.y = -120
+	end.z = L
+end segment
+
+segment 34
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 122.3659809
+	begin.y = -12.4726391
+	begin.z = 0
+	end.x = 122.3659809
+	end.y = -90
+	end.z = L
+end segment
+
+segment 35
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 81.57732058
+	begin.y = -8.315092732
+	begin.z = 0
+	end.x = 81.57732058
+	end.y = -60
+	end.z = L
+end segment
+
+segment 36
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 40.78866029
+	begin.y = -4.157546366
+	begin.z = 0
+	end.x = 40.78866029
+	end.y = -30
+	end.z = L
+end segment
+
+segment 37
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0
+	begin.y = 0
+	begin.z = 0
+	end.x = 0
+	end.y = 0
+	end.z = L
+end segment
+
+segment 38
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -40.78866029
+	begin.y = 4.157546366
+	begin.z = 0
+	end.x = -40.78866029
+	end.y = 30
+	end.z = L
+end segment
+
+segment 39
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -81.57732058
+	begin.y = 8.315092732
+	begin.z = 0
+	end.x = -81.57732058
+	end.y = 60
+	end.z = L
+end segment
+
+segment 40
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -122.3659809
+	begin.y = 12.4726391
+	begin.z = 0
+	end.x = -122.3659809
+	end.y = 90
+	end.z = L
+end segment
+
+segment 41
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -163.1546412
+	begin.y = 16.63018546
+	begin.z = 0
+	end.x = -163.1546412
+	end.y = 120
+	end.z = L
+end segment
+
+segment 42
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 146.3608518
+	begin.y = 20.77260372
+	begin.z = 0
+	end.x = 146.3608518
+	end.y = 150
+	end.z = L
+end segment
+
+segment 43
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 105.5721915
+	begin.y = 24.93015008
+	begin.z = 0
+	end.x = 105.5721915
+	end.y = 180
+	end.z = L
+end segment
+
+segment 44
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 64.7835312
+	begin.y = 29.08769645
+	begin.z = 0
+	end.x = 64.7835312
+	end.y = 210
+	end.z = L
+end segment
+
+segment 45
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 23.99487092
+	begin.y = 33.24524281
+	begin.z = 0
+	end.x = 23.99487092
+	end.y = 240
+	end.z = L
+end segment
+
+segment 46
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -16.79378937
+	begin.y = 37.40278918
+	begin.z = 0
+	end.x = -16.79378937
+	end.y = 270
+	end.z = L
+end segment
+
+segment 47
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -57.58244966
+	begin.y = 41.56033555
+	begin.z = 0
+	end.x = -57.58244966
+	end.y = 300
+	end.z = L
+end segment
+
+segment 48
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -98.37110995
+	begin.y = 45.71788191
+	begin.z = 0
+	end.x = -98.37110995
+	end.y = 330
+	end.z = L
+end segment
+
+segment 49
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -139.1597702
+	begin.y = 49.87542828
+	begin.z = 0
+	end.x = -139.1597702
+	end.y = 360
+	end.z = L
+end segment
+
+segment 50
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 170.3557227
+	begin.y = 54.01784653
+	begin.z = 0
+	end.x = 170.3557227
+	end.y = 390
+	end.z = L
+end segment
+
+segment 51
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 129.5670624
+	begin.y = 58.1753929
+	begin.z = 0
+	end.x = 129.5670624
+	end.y = 420
+	end.z = L
+end segment
+
+segment 52
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 88.77840212
+	begin.y = 62.33293926
+	begin.z = 0
+	end.x = 88.77840212
+	end.y = 450
+	end.z = L
+end segment
+
+segment 53
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 47.98974183
+	begin.y = 66.49048563
+	begin.z = 0
+	end.x = 47.98974183
+	end.y = 480
+	end.z = L
+end segment
+
+segment 54
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 7.201081541
+	begin.y = 70.64803199
+	begin.z = 0
+	end.x = 7.201081541
+	end.y = 510
+	end.z = L
+end segment
+
+segment 55
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -33.58757875
+	begin.y = 74.80557836
+	begin.z = 0
+	end.x = -33.58757875
+	end.y = 540
+	end.z = L
+end segment
+
+segment 56
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -74.37623904
+	begin.y = 78.96312473
+	begin.z = 0
+	end.x = -74.37623904
+	end.y = 570
+	end.z = L
+end segment
+
+segment 57
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -115.1648993
+	begin.y = 83.12067109
+	begin.z = 0
+	end.x = -115.1648993
+	end.y = 600
+	end.z = L
+end segment
+
+segment 58
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -155.9535596
+	begin.y = 87.27821746
+	begin.z = 0
+	end.x = -155.9535596
+	end.y = 630
+	end.z = L
+end segment
+
+segment 59
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 153.5619333
+	begin.y = 91.42063571
+	begin.z = 0
+	end.x = 153.5619333
+	end.y = 660
+	end.z = L
+end segment
+
+segment 60
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 112.773273
+	begin.y = 95.57818208
+	begin.z = 0
+	end.x = 112.773273
+	end.y = 690
+	end.z = L
+end segment
+
+segment 61
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 71.98461275
+	begin.y = 99.73572844
+	begin.z = 0
+	end.x = 71.98461275
+	end.y = 720
+	end.z = L
+end segment
+
+segment 62
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 31.19595246
+	begin.y = 103.8932748
+	begin.z = 0
+	end.x = 31.19595246
+	end.y = 750
+	end.z = L
+end segment
+
+segment 63
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -9.592707834
+	begin.y = 108.0508212
+	begin.z = 0
+	end.x = -9.592707834
+	end.y = 780
+	end.z = L
+end segment
+
+segment 64
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -50.38136812
+	begin.y = 112.2083675
+	begin.z = 0
+	end.x = -50.38136812
+	end.y = 810
+	end.z = L
+end segment
+
+segment 65
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -91.17002841
+	begin.y = 116.3659139
+	begin.z = 0
+	end.x = -91.17002841
+	end.y = 840
+	end.z = L
+end segment
+
+segment 66
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -131.9586887
+	begin.y = 120.5234603
+	begin.z = 0
+	end.x = -131.9586887
+	end.y = 870
+	end.z = L
+end segment
+
+segment 67
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 95.97948366
+	begin.y = 132.9809713
+	begin.z = 0
+	end.x = 95.97948366
+	end.y = 900
+	end.z = L
+end segment
+
+segment 68
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 55.19082337
+	begin.y = 137.1385176
+	begin.z = 0
+	end.x = 55.19082337
+	end.y = 930
+	end.z = L
+end segment
+
+segment 69
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 14.40216308
+	begin.y = 141.296064
+	begin.z = 0
+	end.x = 14.40216308
+	end.y = 960
+	end.z = L
+end segment
+
+segment 70
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -26.38649721
+	begin.y = 145.4536104
+	begin.z = 0
+	end.x = -26.38649721
+	end.y = 990
+	end.z = L
+end segment
+
+segment 71
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -67.1751575
+	begin.y = 149.6111567
+	begin.z = 0
+	end.x = -67.1751575
+	end.y = 1020
+	end.z = L
+end segment
+
+segment 72
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 38.397034
+	begin.y = 174.5413068
+	begin.z = 0
+	end.x = 38.397034
+	end.y = 1050
+	end.z = L
+end segment
+
+segment 73
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = -2.391626293
+	begin.y = 178.6988532
+	begin.z = 0
+	end.x = -2.391626293
+	end.y = 1080
+	end.z = L
+end segment
+
+
+pathway 1
+	1
+end pathway
+
+pathway 2
+	2
+end pathway
+
+pathway 3
+	3
+end pathway
+
+pathway 4
+	4
+end pathway
+
+pathway 5
+	5
+end pathway
+
+pathway 6
+	6
+end pathway
+
+pathway 7
+	7
+end pathway
+
+pathway 8
+	8
+end pathway
+
+pathway 9
+	9
+end pathway
+
+pathway 10
+	10
+end pathway
+
+pathway 11
+	11
+end pathway
+
+pathway 12
+	12
+end pathway
+
+pathway 13
+	13
+end pathway
+
+pathway 14
+	14
+end pathway
+
+pathway 15
+	15
+end pathway
+
+pathway 16
+	16
+end pathway
+
+pathway 17
+	17
+end pathway
+
+pathway 18
+	18
+end pathway
+
+pathway 19
+	19
+end pathway
+
+pathway 20
+	20
+end pathway
+
+pathway 21
+	21
+end pathway
+
+pathway 22
+	22
+end pathway
+
+pathway 23
+	23
+end pathway
+
+pathway 24
+	24
+end pathway
+
+pathway 25
+	25
+end pathway
+
+pathway 26
+	26
+end pathway
+
+pathway 27
+	27
+end pathway
+
+pathway 28
+	28
+end pathway
+
+pathway 29
+	29
+end pathway
+
+pathway 30
+	30
+end pathway
+
+pathway 31
+	31
+end pathway
+
+pathway 32
+	32
+end pathway
+
+pathway 33
+	33
+end pathway
+
+pathway 34
+	34
+end pathway
+
+pathway 35
+	35
+end pathway
+
+pathway 36
+	36
+end pathway
+
+pathway 37
+	37
+end pathway
+
+pathway 38
+	38
+end pathway
+
+pathway 39
+	39
+end pathway
+
+pathway 40
+	40
+end pathway
+
+pathway 41
+	41
+end pathway
+
+pathway 42
+	42
+end pathway
+
+pathway 43
+	43
+end pathway
+
+pathway 44
+	44
+end pathway
+
+pathway 45
+	45
+end pathway
+
+pathway 46
+	46
+end pathway
+
+pathway 47
+	47
+end pathway
+
+pathway 48
+	48
+end pathway
+
+pathway 49
+	49
+end pathway
+
+pathway 50
+	50
+end pathway
+
+pathway 51
+	51
+end pathway
+
+pathway 52
+	52
+end pathway
+
+pathway 53
+	53
+end pathway
+
+pathway 54
+	54
+end pathway
+
+pathway 55
+	55
+end pathway
+
+pathway 56
+	56
+end pathway
+
+pathway 57
+	57
+end pathway
+
+pathway 58
+	58
+end pathway
+
+pathway 59
+	59
+end pathway
+
+pathway 60
+	60
+end pathway
+
+pathway 61
+	61
+end pathway
+
+pathway 62
+	62
+end pathway
+
+pathway 63
+	63
+end pathway
+
+pathway 64
+	64
+end pathway
+
+pathway 65
+	65
+end pathway
+
+pathway 66
+	66
+end pathway
+
+pathway 67
+	67
+end pathway
+
+pathway 68
+	68
+end pathway
+
+pathway 69
+	69
+end pathway
+
+pathway 70
+	70
+end pathway
+
+pathway 71
+	71
+end pathway
+
+pathway 72
+	72
+end pathway
+
+pathway 73
+	73
+end pathway
+
+monitor 1
+	pathway = 1
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 2
+	pathway = 2
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 3
+	pathway = 3
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 4
+	pathway = 4
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 5
+	pathway = 5
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 6
+	pathway = 6
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 7
+	pathway = 7
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 8
+	pathway = 8
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 9
+	pathway = 9
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 10
+	pathway = 10
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 11
+	pathway = 11
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 12
+	pathway = 12
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 13
+	pathway = 13
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 14
+	pathway = 14
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 15
+	pathway = 15
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 16
+	pathway = 16
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 17
+	pathway = 17
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 18
+	pathway = 18
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 19
+	pathway = 19
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 20
+	pathway = 20
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 21
+	pathway = 21
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 22
+	pathway = 22
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 23
+	pathway = 23
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 24
+	pathway = 24
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 25
+	pathway = 25
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 26
+	pathway = 26
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 27
+	pathway = 27
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 28
+	pathway = 28
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 29
+	pathway = 29
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 30
+	pathway = 30
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 31
+	pathway = 31
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 32
+	pathway = 32
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 33
+	pathway = 33
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 34
+	pathway = 34
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 35
+	pathway = 35
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 36
+	pathway = 36
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 37
+	pathway = 37
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 38
+	pathway = 38
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 39
+	pathway = 39
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 40
+	pathway = 40
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 41
+	pathway = 41
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 42
+	pathway = 42
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 43
+	pathway = 43
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 44
+	pathway = 44
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 45
+	pathway = 45
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 46
+	pathway = 46
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 47
+	pathway = 47
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 48
+	pathway = 48
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 49
+	pathway = 49
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 50
+	pathway = 50
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 51
+	pathway = 51
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 52
+	pathway = 52
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 53
+	pathway = 53
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 54
+	pathway = 54
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 55
+	pathway = 55
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 56
+	pathway = 56
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 57
+	pathway = 57
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 58
+	pathway = 58
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 59
+	pathway = 59
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 60
+	pathway = 60
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 61
+	pathway = 61
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 62
+	pathway = 62
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 63
+	pathway = 63
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 64
+	pathway = 64
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 65
+	pathway = 65
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 66
+	pathway = 66
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 67
+	pathway = 67
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 68
+	pathway = 68
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 69
+	pathway = 69
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 70
+	pathway = 70
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 71
+	pathway = 71
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 72
+	pathway = 72
+	monitor_type = MONITOR_WG_POWER
+end monitor
+
+monitor 73
+	pathway = 73
+	monitor_type = MONITOR_WG_POWER
+end monitor
