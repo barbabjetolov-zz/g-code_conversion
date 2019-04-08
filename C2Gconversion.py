@@ -17,13 +17,7 @@ import gcode_conversion as gcc
 from init_parse import init_parse
 from trigonometry_in_degrees import *
 
-functions = ['sin','cos','tan','atan','sqrt']
 
-'''
-TODO
-1) mettere grafica in modulo a sé stante
-2) finire opzioni
-'''
 
 '''
 Check for options
@@ -76,9 +70,15 @@ axs[1,0].set_ylabel(axes[1])
 
 axs[-1, -1].axis('off')
 
-#all colors - except white
+'''
+All colors, except white
+For the matplotlib output
+'''
 colors = ['b','g','r','c','m','y','k']
 
+'''
+Array initialization
+'''
 x = []
 y = []
 z = []
@@ -164,11 +164,6 @@ for n,segment in enumerate(segList):
 
 
 '''
-Units conversion
-'''
-#ind_tools.unit_conversion(segList,float(dicinit['conv_factor']))
-
-'''
 Reconstructing the waveguides
 i.e. checks how many waveguides are simulated
 by counting the segments having begin.z = 0
@@ -181,7 +176,7 @@ Printing of declaration of variables on the gcode file
 '''
 if VERBOSE==1:
     print('\nStart printing on file...\n')
-#prints declarations on g-code file
+
 output.write('DVAR')
 for key, val in gcodeinit.items():
     if key=='DWELL':
@@ -212,15 +207,13 @@ Prints one full waveguide at a time
 
 global paragon
 
-q = [0.]
-w = [0.]
-e = [0.]
-
 for n,beg in enumerate(begins):
 
     paragon = beg
 
-    #moves laser head to begin of segment
+    '''
+    Moves laser head to begin of segment
+    '''
     output.write('\n\n///Moves head to begin of segment///\n\n')
     output.write('\nLINEAR %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],paragon['begin.z'],
                                                                                                axes[1],paragon['begin.y'],
