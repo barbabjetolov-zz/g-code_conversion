@@ -1,7 +1,7 @@
 out.txt
 modules/__pycache__
 modules/param.py
-ignore/
+**ignore/
 plot_out.py
 Eagle lowerpowers.txt
 Eagle 0.55NA.txt
