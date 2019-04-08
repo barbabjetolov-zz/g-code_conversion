@@ -222,9 +222,10 @@ for n,beg in enumerate(begins):
 
     #moves laser head to begin of segment
     output.write('\n\n///Moves head to begin of segment///\n\n')
-    output.write('\nLINEAR %s %s %s %s %s %s*$RIN F $SPEED\n'%(axes[0],paragon['begin.z'],
-                                                               axes[1],paragon['begin.y'],
-                                                               axes[2],paragon['begin.x']))
+    output.write('\nLINEAR %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],paragon['begin.z'],
+                                                                                               axes[1],paragon['begin.y'],
+                                                                                               axes[2],paragon['begin.x'],
+                                                                                               paragon['begin.z'],paragon['begin.y']))
 
     print('Print section nr. %s'%beg['number'])
     output.write('\n\n/////Printing section %s////////\n\n'%paragon['number'])
