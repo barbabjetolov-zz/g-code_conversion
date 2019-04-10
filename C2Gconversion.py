@@ -158,7 +158,7 @@ for n,segment in enumerate(segList):
                 pos = segment[i].split(' ')[3] + '.' + ax
                 ind = eval(segment[i].split(' ')[5])
 
-                segment[i] = eval(rel) + eval(segList[ind-1][pos])
+                segment[i] = eval(rel) + segList[ind-1][pos]
             except IndexError:
                 segment[i] = eval(segment[i])
 
@@ -328,9 +328,10 @@ for n,beg in enumerate(begins):
             fig.canvas.flush_events()
 
         output.write('\n\n///Returns to origin///\n\n')
-        output.write('\nLINEAR %s %s %s %s %s %s*$RIN F $SPEED\n'%(axes[0],-paragon['end.z'],
-                                                                   axes[1],-paragon['end.y'],
-                                                                   axes[2],-paragon['end.x']))
+        output.write('\nLINEAR %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],-paragon['end.z'],
+                                                                                                   axes[1],-paragon['end.y'],
+                                                                                                   axes[2],-paragon['end.x'],
+                                                                                                   -paragon['begin.z'],-paragon['begin.y']))
 
 
 x = []
