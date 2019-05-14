@@ -5,3 +5,4 @@ out/**
 plot_out.py
 Eagle lowerpowers.txt
 Eagle 0.55NA.txt
+__pycache__/**
