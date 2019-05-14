@@ -314,7 +314,7 @@ for n,beg in enumerate(begins):
             y.append(paragon['end.y'])
             x.append(paragon['end.x'])
             x.append(paragon['end.x'])
-            print(x[0],y[0],z[0])
+        
             axs[0,0].plot(x,z,color='k',linewidth=1)
             axs[0,1].plot(y,z,color='k',linewidth=1)
             axs[1,0].plot(x,y,color='k',linewidth=1)
