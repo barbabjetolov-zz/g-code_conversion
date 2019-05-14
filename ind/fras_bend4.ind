@@ -28,6 +28,7 @@ segment 1
 	position_taper = TAPER_USER_1
 	position_y_taper = TAPER_USER_1
 	begin.x = 0
+	begin.y = 0
 	begin.z = 0
 	end.x = 0 rel begin segment 1
 	end.y = 0 rel begin segment 1
@@ -66,5 +67,3 @@ segment 4
 	end.y = 3*bend rel begin segment 4
 	end.z = L rel begin segment 4
 end segment
-
-
