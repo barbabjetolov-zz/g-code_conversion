@@ -1,0 +1,70 @@
+
+L = 3000
+alpha = 8e-07
+background_index = 1.49
+bend = 1
+d = 10
+delta = 0.002627024
+dimension = 3
+eim = 0
+field_output_format = OUTPUT_REAL_IMAG
+free_space_wavelength = 1.1
+height = 2
+k0 = (2*pi)/free_space_wavelength
+sim_tool = ST_BEAMPROP
+slice_display_mode = DISPLAY_NONE
+step_size = 15
+structure = STRUCT_FIBER
+width = 10
+
+
+user_taper 1
+	type = UF_EXPRESSION
+	expression = z-sin(360*z)/(2*pi)
+end user_taper
+
+
+segment 1
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0
+	begin.z = 0
+	end.x = 0 rel begin segment 1
+	end.y = 0 rel begin segment 1
+	end.z = L rel begin segment 1
+end segment
+
+segment 2
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel begin segment 1
+	begin.y = d rel end segment 1
+	begin.z = 0 rel begin segment 1
+	end.x = 0 rel begin segment 2
+	end.y = 1 rel begin segment 2
+	end.z = L rel begin segment 2
+end segment
+
+segment 3
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel begin segment 2
+	begin.y = d rel end segment 2
+	begin.z = 0 rel begin segment 2
+	end.x = 0 rel begin segment 3
+	end.y = 2*bend rel begin segment 3
+	end.z = L rel begin segment 3
+end segment
+
+segment 4
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel begin segment 3
+	begin.y = d rel end segment 3
+	begin.z = 0 rel begin segment 3
+	end.x = 0 rel begin segment 4
+	end.y = 3*bend rel begin segment 4
+	end.z = L rel begin segment 4
+end segment
+
+

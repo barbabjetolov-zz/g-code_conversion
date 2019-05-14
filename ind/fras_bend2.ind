@@ -1,0 +1,1453 @@
+L = 30
+height = 2
+width = 10
+dy = 0.08
+
+alpha = 8e-07
+background_index = 1.49
+delta = 0.002627024
+dimension = 3
+eim = 0
+field_output_format = OUTPUT_REAL_IMAG
+free_space_wavelength = 1.1
+k0 = (2*pi)/free_space_wavelength
+sim_tool = ST_BEAMPROP
+slice_display_mode = DISPLAY_NONE
+step_size = 15
+structure = STRUCT_FIBER
+
+user_taper 1
+	type = UF_EXPRESSION
+	expression = z-sin(360*z)/(2*pi)
+end user_taper
+
+segment 1
+	begin.x = 0
+	begin.y = 0
+	begin.z = 0
+	end.x = 0 rel begin segment 1
+	end.y = 0 rel begin segment 1
+	end.z = L rel begin segment 1
+end segment
+
+segment 2
+	begin.x = 0
+	begin.y = dy rel begin segment 1
+	begin.z = 0
+	end.x = 0 rel begin segment 2
+	end.y = 0 rel begin segment 2
+	end.z = 1
+end segment
+
+
+segment 3
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 2
+	begin.y = 0 rel end segment 2
+	begin.z = 0 rel end segment 2
+	end.x = 0 rel begin segment 3
+	end.y = 1 rel begin segment 3
+	end.z = 27.720000
+end segment
+
+segment 4
+	begin.x = 0 rel end segment 3
+	begin.y = 0 rel end segment 3
+	begin.z = 0 rel end segment 3
+	end.x = 0 rel begin segment 4
+	end.y = 0 rel begin segment 4
+	end.z = 30
+end segment
+
+segment 5
+	begin.x = 0
+	begin.y = dy rel begin segment 2
+	begin.z = 0
+	end.x = 0 rel begin segment 5
+	end.y = 0 rel begin segment 5
+	end.z = 1
+end segment
+
+segment 6
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 5
+	begin.y = 0 rel end segment 5
+	begin.z = 0 rel end segment 5
+	end.x = 0 rel begin segment 6
+	end.y = 1 rel begin segment 6
+	end.z = 27.440000
+end segment
+
+segment 7
+	begin.x = 0 rel end segment 6
+	begin.y = 0 rel end segment 6
+	begin.z = 0 rel end segment 6
+	end.x = 0 rel begin segment 7
+	end.y = 0 rel begin segment 7
+	end.z = 30
+end segment
+
+segment 8
+	begin.x = 0
+	begin.y = dy rel begin segment 5
+	begin.z = 0
+	end.x = 0 rel begin segment 8
+	end.y = 0 rel begin segment 8
+	end.z = 1
+end segment
+
+segment 9
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 8
+	begin.y = 0 rel end segment 8
+	begin.z = 0 rel end segment 8
+	end.x = 0 rel begin segment 9
+	end.y = 1 rel begin segment 9
+	end.z = 27.160000
+end segment
+
+segment 10
+	begin.x = 0 rel end segment 9
+	begin.y = 0 rel end segment 9
+	begin.z = 0 rel end segment 9
+	end.x = 0 rel begin segment 10
+	end.y = 0 rel begin segment 10
+	end.z = 30
+end segment
+
+segment 11
+	begin.x = 0
+	begin.y = dy rel begin segment 8
+	begin.z = 0
+	end.x = 0 rel begin segment 11
+	end.y = 0 rel begin segment 11
+	end.z = 1
+end segment
+
+segment 12
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 11
+	begin.y = 0 rel end segment 11
+	begin.z = 0 rel end segment 11
+	end.x = 0 rel begin segment 12
+	end.y = 1 rel begin segment 12
+	end.z = 26.880000
+end segment
+
+segment 13
+	begin.x = 0 rel end segment 12
+	begin.y = 0 rel end segment 12
+	begin.z = 0 rel end segment 12
+	end.x = 0 rel begin segment 13
+	end.y = 0 rel begin segment 13
+	end.z = 30
+end segment
+
+segment 14
+	begin.x = 0
+	begin.y = dy rel begin segment 11
+	begin.z = 0
+	end.x = 0 rel begin segment 14
+	end.y = 0 rel begin segment 14
+	end.z = 1
+end segment
+
+segment 15
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 14
+	begin.y = 0 rel end segment 14
+	begin.z = 0 rel end segment 14
+	end.x = 0 rel begin segment 15
+	end.y = 1 rel begin segment 15
+	end.z = 26.600000
+end segment
+
+segment 16
+	begin.x = 0 rel end segment 15
+	begin.y = 0 rel end segment 15
+	begin.z = 0 rel end segment 15
+	end.x = 0 rel begin segment 16
+	end.y = 0 rel begin segment 16
+	end.z = 30
+end segment
+
+segment 17
+	begin.x = 0
+	begin.y = dy rel begin segment 14
+	begin.z = 0
+	end.x = 0 rel begin segment 17
+	end.y = 0 rel begin segment 17
+	end.z = 1
+end segment
+
+segment 18
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 17
+	begin.y = 0 rel end segment 17
+	begin.z = 0 rel end segment 17
+	end.x = 0 rel begin segment 18
+	end.y = 1 rel begin segment 18
+	end.z = 26.320000
+end segment
+
+segment 19
+	begin.x = 0 rel end segment 18
+	begin.y = 0 rel end segment 18
+	begin.z = 0 rel end segment 18
+	end.x = 0 rel begin segment 19
+	end.y = 0 rel begin segment 19
+	end.z = 30
+end segment
+
+segment 20
+	begin.x = 0
+	begin.y = dy rel begin segment 17
+	begin.z = 0
+	end.x = 0 rel begin segment 20
+	end.y = 0 rel begin segment 20
+	end.z = 1
+end segment
+
+segment 21
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 20
+	begin.y = 0 rel end segment 20
+	begin.z = 0 rel end segment 20
+	end.x = 0 rel begin segment 21
+	end.y = 1 rel begin segment 21
+	end.z = 26.040000
+end segment
+
+segment 22
+	begin.x = 0 rel end segment 21
+	begin.y = 0 rel end segment 21
+	begin.z = 0 rel end segment 21
+	end.x = 0 rel begin segment 22
+	end.y = 0 rel begin segment 22
+	end.z = 30
+end segment
+
+segment 23
+	begin.x = 0
+	begin.y = dy rel begin segment 20
+	begin.z = 0
+	end.x = 0 rel begin segment 23
+	end.y = 0 rel begin segment 23
+	end.z = 1
+end segment
+
+segment 24
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 23
+	begin.y = 0 rel end segment 23
+	begin.z = 0 rel end segment 23
+	end.x = 0 rel begin segment 24
+	end.y = 1 rel begin segment 24
+	end.z = 25.760000
+end segment
+
+segment 25
+	begin.x = 0 rel end segment 24
+	begin.y = 0 rel end segment 24
+	begin.z = 0 rel end segment 24
+	end.x = 0 rel begin segment 25
+	end.y = 0 rel begin segment 25
+	end.z = 30
+end segment
+
+segment 26
+	begin.x = 0
+	begin.y = dy rel begin segment 23
+	begin.z = 0
+	end.x = 0 rel begin segment 26
+	end.y = 0 rel begin segment 26
+	end.z = 1
+end segment
+
+segment 27
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 26
+	begin.y = 0 rel end segment 26
+	begin.z = 0 rel end segment 26
+	end.x = 0 rel begin segment 27
+	end.y = 1 rel begin segment 27
+	end.z = 25.480000
+end segment
+
+segment 28
+	begin.x = 0 rel end segment 27
+	begin.y = 0 rel end segment 27
+	begin.z = 0 rel end segment 27
+	end.x = 0 rel begin segment 28
+	end.y = 0 rel begin segment 28
+	end.z = 30
+end segment
+
+segment 29
+	begin.x = 0
+	begin.y = dy rel begin segment 26
+	begin.z = 0
+	end.x = 0 rel begin segment 29
+	end.y = 0 rel begin segment 29
+	end.z = 1
+end segment
+
+segment 30
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 29
+	begin.y = 0 rel end segment 29
+	begin.z = 0 rel end segment 29
+	end.x = 0 rel begin segment 30
+	end.y = 1 rel begin segment 30
+	end.z = 25.200000
+end segment
+
+segment 31
+	begin.x = 0 rel end segment 30
+	begin.y = 0 rel end segment 30
+	begin.z = 0 rel end segment 30
+	end.x = 0 rel begin segment 31
+	end.y = 0 rel begin segment 31
+	end.z = 30
+end segment
+
+segment 32
+	begin.x = 0
+	begin.y = dy rel begin segment 29
+	begin.z = 0
+	end.x = 0 rel begin segment 32
+	end.y = 0 rel begin segment 32
+	end.z = 1
+end segment
+
+segment 33
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 32
+	begin.y = 0 rel end segment 32
+	begin.z = 0 rel end segment 32
+	end.x = 0 rel begin segment 33
+	end.y = 1 rel begin segment 33
+	end.z = 24.920000
+end segment
+
+segment 34
+	begin.x = 0 rel end segment 33
+	begin.y = 0 rel end segment 33
+	begin.z = 0 rel end segment 33
+	end.x = 0 rel begin segment 34
+	end.y = 0 rel begin segment 34
+	end.z = 30
+end segment
+
+segment 35
+	begin.x = 0
+	begin.y = dy rel begin segment 32
+	begin.z = 0
+	end.x = 0 rel begin segment 35
+	end.y = 0 rel begin segment 35
+	end.z = 1
+end segment
+
+segment 36
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 35
+	begin.y = 0 rel end segment 35
+	begin.z = 0 rel end segment 35
+	end.x = 0 rel begin segment 36
+	end.y = 1 rel begin segment 36
+	end.z = 24.640000
+end segment
+
+segment 37
+	begin.x = 0 rel end segment 36
+	begin.y = 0 rel end segment 36
+	begin.z = 0 rel end segment 36
+	end.x = 0 rel begin segment 37
+	end.y = 0 rel begin segment 37
+	end.z = 30
+end segment
+
+segment 38
+	begin.x = 0
+	begin.y = dy rel begin segment 35
+	begin.z = 0
+	end.x = 0 rel begin segment 38
+	end.y = 0 rel begin segment 38
+	end.z = 1
+end segment
+
+segment 39
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 38
+	begin.y = 0 rel end segment 38
+	begin.z = 0 rel end segment 38
+	end.x = 0 rel begin segment 39
+	end.y = 1 rel begin segment 39
+	end.z = 24.360000
+end segment
+
+segment 40
+	begin.x = 0 rel end segment 39
+	begin.y = 0 rel end segment 39
+	begin.z = 0 rel end segment 39
+	end.x = 0 rel begin segment 40
+	end.y = 0 rel begin segment 40
+	end.z = 30
+end segment
+
+segment 41
+	begin.x = 0
+	begin.y = dy rel begin segment 38
+	begin.z = 0
+	end.x = 0 rel begin segment 41
+	end.y = 0 rel begin segment 41
+	end.z = 1
+end segment
+
+segment 42
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 41
+	begin.y = 0 rel end segment 41
+	begin.z = 0 rel end segment 41
+	end.x = 0 rel begin segment 42
+	end.y = 1 rel begin segment 42
+	end.z = 24.080000
+end segment
+
+segment 43
+	begin.x = 0 rel end segment 42
+	begin.y = 0 rel end segment 42
+	begin.z = 0 rel end segment 42
+	end.x = 0 rel begin segment 43
+	end.y = 0 rel begin segment 43
+	end.z = 30
+end segment
+
+segment 44
+	begin.x = 0
+	begin.y = dy rel begin segment 41
+	begin.z = 0
+	end.x = 0 rel begin segment 44
+	end.y = 0 rel begin segment 44
+	end.z = 1
+end segment
+
+segment 45
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 44
+	begin.y = 0 rel end segment 44
+	begin.z = 0 rel end segment 44
+	end.x = 0 rel begin segment 45
+	end.y = 1 rel begin segment 45
+	end.z = 23.800000
+end segment
+
+segment 46
+	begin.x = 0 rel end segment 45
+	begin.y = 0 rel end segment 45
+	begin.z = 0 rel end segment 45
+	end.x = 0 rel begin segment 46
+	end.y = 0 rel begin segment 46
+	end.z = 30
+end segment
+
+segment 47
+	begin.x = 0
+	begin.y = dy rel begin segment 44
+	begin.z = 0
+	end.x = 0 rel begin segment 47
+	end.y = 0 rel begin segment 47
+	end.z = 1
+end segment
+
+segment 48
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 47
+	begin.y = 0 rel end segment 47
+	begin.z = 0 rel end segment 47
+	end.x = 0 rel begin segment 48
+	end.y = 1 rel begin segment 48
+	end.z = 23.520000
+end segment
+
+segment 49
+	begin.x = 0 rel end segment 48
+	begin.y = 0 rel end segment 48
+	begin.z = 0 rel end segment 48
+	end.x = 0 rel begin segment 49
+	end.y = 0 rel begin segment 49
+	end.z = 30
+end segment
+
+segment 50
+	begin.x = 0
+	begin.y = dy rel begin segment 47
+	begin.z = 0
+	end.x = 0 rel begin segment 50
+	end.y = 0 rel begin segment 50
+	end.z = 1
+end segment
+
+segment 51
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 50
+	begin.y = 0 rel end segment 50
+	begin.z = 0 rel end segment 50
+	end.x = 0 rel begin segment 51
+	end.y = 1 rel begin segment 51
+	end.z = 23.240000
+end segment
+
+segment 52
+	begin.x = 0 rel end segment 51
+	begin.y = 0 rel end segment 51
+	begin.z = 0 rel end segment 51
+	end.x = 0 rel begin segment 52
+	end.y = 0 rel begin segment 52
+	end.z = 30
+end segment
+
+segment 53
+	begin.x = 0
+	begin.y = dy rel begin segment 50
+	begin.z = 0
+	end.x = 0 rel begin segment 53
+	end.y = 0 rel begin segment 53
+	end.z = 1
+end segment
+
+segment 54
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 53
+	begin.y = 0 rel end segment 53
+	begin.z = 0 rel end segment 53
+	end.x = 0 rel begin segment 54
+	end.y = 1 rel begin segment 54
+	end.z = 22.960000
+end segment
+
+segment 55
+	begin.x = 0 rel end segment 54
+	begin.y = 0 rel end segment 54
+	begin.z = 0 rel end segment 54
+	end.x = 0 rel begin segment 55
+	end.y = 0 rel begin segment 55
+	end.z = 30
+end segment
+
+segment 56
+	begin.x = 0
+	begin.y = dy rel begin segment 53
+	begin.z = 0
+	end.x = 0 rel begin segment 56
+	end.y = 0 rel begin segment 56
+	end.z = 1
+end segment
+
+segment 57
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 56
+	begin.y = 0 rel end segment 56
+	begin.z = 0 rel end segment 56
+	end.x = 0 rel begin segment 57
+	end.y = 1 rel begin segment 57
+	end.z = 22.680000
+end segment
+
+segment 58
+	begin.x = 0 rel end segment 57
+	begin.y = 0 rel end segment 57
+	begin.z = 0 rel end segment 57
+	end.x = 0 rel begin segment 58
+	end.y = 0 rel begin segment 58
+	end.z = 30
+end segment
+
+segment 59
+	begin.x = 0
+	begin.y = dy rel begin segment 56
+	begin.z = 0
+	end.x = 0 rel begin segment 59
+	end.y = 0 rel begin segment 59
+	end.z = 1
+end segment
+
+segment 60
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 59
+	begin.y = 0 rel end segment 59
+	begin.z = 0 rel end segment 59
+	end.x = 0 rel begin segment 60
+	end.y = 1 rel begin segment 60
+	end.z = 22.400000
+end segment
+
+segment 61
+	begin.x = 0 rel end segment 60
+	begin.y = 0 rel end segment 60
+	begin.z = 0 rel end segment 60
+	end.x = 0 rel begin segment 61
+	end.y = 0 rel begin segment 61
+	end.z = 30
+end segment
+
+segment 62
+	begin.x = 0
+	begin.y = dy rel begin segment 59
+	begin.z = 0
+	end.x = 0 rel begin segment 62
+	end.y = 0 rel begin segment 62
+	end.z = 1
+end segment
+
+segment 63
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 62
+	begin.y = 0 rel end segment 62
+	begin.z = 0 rel end segment 62
+	end.x = 0 rel begin segment 63
+	end.y = 1 rel begin segment 63
+	end.z = 22.120000
+end segment
+
+segment 64
+	begin.x = 0 rel end segment 63
+	begin.y = 0 rel end segment 63
+	begin.z = 0 rel end segment 63
+	end.x = 0 rel begin segment 64
+	end.y = 0 rel begin segment 64
+	end.z = 30
+end segment
+
+segment 65
+	begin.x = 0
+	begin.y = dy rel begin segment 62
+	begin.z = 0
+	end.x = 0 rel begin segment 65
+	end.y = 0 rel begin segment 65
+	end.z = 1
+end segment
+
+segment 66
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 65
+	begin.y = 0 rel end segment 65
+	begin.z = 0 rel end segment 65
+	end.x = 0 rel begin segment 66
+	end.y = 1 rel begin segment 66
+	end.z = 21.840000
+end segment
+
+segment 67
+	begin.x = 0 rel end segment 66
+	begin.y = 0 rel end segment 66
+	begin.z = 0 rel end segment 66
+	end.x = 0 rel begin segment 67
+	end.y = 0 rel begin segment 67
+	end.z = 30
+end segment
+
+segment 68
+	begin.x = 0
+	begin.y = dy rel begin segment 65
+	begin.z = 0
+	end.x = 0 rel begin segment 68
+	end.y = 0 rel begin segment 68
+	end.z = 1
+end segment
+
+segment 69
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 68
+	begin.y = 0 rel end segment 68
+	begin.z = 0 rel end segment 68
+	end.x = 0 rel begin segment 69
+	end.y = 1 rel begin segment 69
+	end.z = 21.560000
+end segment
+
+segment 70
+	begin.x = 0 rel end segment 69
+	begin.y = 0 rel end segment 69
+	begin.z = 0 rel end segment 69
+	end.x = 0 rel begin segment 70
+	end.y = 0 rel begin segment 70
+	end.z = 30
+end segment
+
+segment 71
+	begin.x = 0
+	begin.y = dy rel begin segment 68
+	begin.z = 0
+	end.x = 0 rel begin segment 71
+	end.y = 0 rel begin segment 71
+	end.z = 1
+end segment
+
+segment 72
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 71
+	begin.y = 0 rel end segment 71
+	begin.z = 0 rel end segment 71
+	end.x = 0 rel begin segment 72
+	end.y = 1 rel begin segment 72
+	end.z = 21.280000
+end segment
+
+segment 73
+	begin.x = 0 rel end segment 72
+	begin.y = 0 rel end segment 72
+	begin.z = 0 rel end segment 72
+	end.x = 0 rel begin segment 73
+	end.y = 0 rel begin segment 73
+	end.z = 30
+end segment
+
+segment 74
+	begin.x = 0
+	begin.y = dy rel begin segment 71
+	begin.z = 0
+	end.x = 0 rel begin segment 74
+	end.y = 0 rel begin segment 74
+	end.z = 1
+end segment
+
+segment 75
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 74
+	begin.y = 0 rel end segment 74
+	begin.z = 0 rel end segment 74
+	end.x = 0 rel begin segment 75
+	end.y = 1 rel begin segment 75
+	end.z = 21.000000
+end segment
+
+segment 76
+	begin.x = 0 rel end segment 75
+	begin.y = 0 rel end segment 75
+	begin.z = 0 rel end segment 75
+	end.x = 0 rel begin segment 76
+	end.y = 0 rel begin segment 76
+	end.z = 30
+end segment
+
+segment 77
+	begin.x = 0
+	begin.y = dy rel begin segment 74
+	begin.z = 0
+	end.x = 0 rel begin segment 77
+	end.y = 0 rel begin segment 77
+	end.z = 1
+end segment
+
+segment 78
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 77
+	begin.y = 0 rel end segment 77
+	begin.z = 0 rel end segment 77
+	end.x = 0 rel begin segment 78
+	end.y = 1 rel begin segment 78
+	end.z = 20.720000
+end segment
+
+segment 79
+	begin.x = 0 rel end segment 78
+	begin.y = 0 rel end segment 78
+	begin.z = 0 rel end segment 78
+	end.x = 0 rel begin segment 79
+	end.y = 0 rel begin segment 79
+	end.z = 30
+end segment
+
+segment 80
+	begin.x = 0
+	begin.y = dy rel begin segment 77
+	begin.z = 0
+	end.x = 0 rel begin segment 80
+	end.y = 0 rel begin segment 80
+	end.z = 1
+end segment
+
+segment 81
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 80
+	begin.y = 0 rel end segment 80
+	begin.z = 0 rel end segment 80
+	end.x = 0 rel begin segment 81
+	end.y = 1 rel begin segment 81
+	end.z = 20.440000
+end segment
+
+segment 82
+	begin.x = 0 rel end segment 81
+	begin.y = 0 rel end segment 81
+	begin.z = 0 rel end segment 81
+	end.x = 0 rel begin segment 82
+	end.y = 0 rel begin segment 82
+	end.z = 30
+end segment
+
+segment 83
+	begin.x = 0
+	begin.y = dy rel begin segment 80
+	begin.z = 0
+	end.x = 0 rel begin segment 83
+	end.y = 0 rel begin segment 83
+	end.z = 1
+end segment
+
+segment 84
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 83
+	begin.y = 0 rel end segment 83
+	begin.z = 0 rel end segment 83
+	end.x = 0 rel begin segment 84
+	end.y = 1 rel begin segment 84
+	end.z = 20.160000
+end segment
+
+segment 85
+	begin.x = 0 rel end segment 84
+	begin.y = 0 rel end segment 84
+	begin.z = 0 rel end segment 84
+	end.x = 0 rel begin segment 85
+	end.y = 0 rel begin segment 85
+	end.z = 30
+end segment
+
+segment 86
+	begin.x = 0
+	begin.y = dy rel begin segment 83
+	begin.z = 0
+	end.x = 0 rel begin segment 86
+	end.y = 0 rel begin segment 86
+	end.z = 1
+end segment
+
+segment 87
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 86
+	begin.y = 0 rel end segment 86
+	begin.z = 0 rel end segment 86
+	end.x = 0 rel begin segment 87
+	end.y = 1 rel begin segment 87
+	end.z = 19.880000
+end segment
+
+segment 88
+	begin.x = 0 rel end segment 87
+	begin.y = 0 rel end segment 87
+	begin.z = 0 rel end segment 87
+	end.x = 0 rel begin segment 88
+	end.y = 0 rel begin segment 88
+	end.z = 30
+end segment
+
+segment 89
+	begin.x = 0
+	begin.y = dy rel begin segment 86
+	begin.z = 0
+	end.x = 0 rel begin segment 89
+	end.y = 0 rel begin segment 89
+	end.z = 1
+end segment
+
+segment 90
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 89
+	begin.y = 0 rel end segment 89
+	begin.z = 0 rel end segment 89
+	end.x = 0 rel begin segment 90
+	end.y = 1 rel begin segment 90
+	end.z = 19.600000
+end segment
+
+segment 91
+	begin.x = 0 rel end segment 90
+	begin.y = 0 rel end segment 90
+	begin.z = 0 rel end segment 90
+	end.x = 0 rel begin segment 91
+	end.y = 0 rel begin segment 91
+	end.z = 30
+end segment
+
+segment 92
+	begin.x = 0
+	begin.y = dy rel begin segment 89
+	begin.z = 0
+	end.x = 0 rel begin segment 92
+	end.y = 0 rel begin segment 92
+	end.z = 1
+end segment
+
+segment 93
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 92
+	begin.y = 0 rel end segment 92
+	begin.z = 0 rel end segment 92
+	end.x = 0 rel begin segment 93
+	end.y = 1 rel begin segment 93
+	end.z = 19.320000
+end segment
+
+segment 94
+	begin.x = 0 rel end segment 93
+	begin.y = 0 rel end segment 93
+	begin.z = 0 rel end segment 93
+	end.x = 0 rel begin segment 94
+	end.y = 0 rel begin segment 94
+	end.z = 30
+end segment
+
+segment 95
+	begin.x = 0
+	begin.y = dy rel begin segment 92
+	begin.z = 0
+	end.x = 0 rel begin segment 95
+	end.y = 0 rel begin segment 95
+	end.z = 1
+end segment
+
+segment 96
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 95
+	begin.y = 0 rel end segment 95
+	begin.z = 0 rel end segment 95
+	end.x = 0 rel begin segment 96
+	end.y = 1 rel begin segment 96
+	end.z = 19.040000
+end segment
+
+segment 97
+	begin.x = 0 rel end segment 96
+	begin.y = 0 rel end segment 96
+	begin.z = 0 rel end segment 96
+	end.x = 0 rel begin segment 97
+	end.y = 0 rel begin segment 97
+	end.z = 30
+end segment
+
+segment 98
+	begin.x = 0
+	begin.y = dy rel begin segment 95
+	begin.z = 0
+	end.x = 0 rel begin segment 98
+	end.y = 0 rel begin segment 98
+	end.z = 1
+end segment
+
+segment 99
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 98
+	begin.y = 0 rel end segment 98
+	begin.z = 0 rel end segment 98
+	end.x = 0 rel begin segment 99
+	end.y = 1 rel begin segment 99
+	end.z = 18.760000
+end segment
+
+segment 100
+	begin.x = 0 rel end segment 99
+	begin.y = 0 rel end segment 99
+	begin.z = 0 rel end segment 99
+	end.x = 0 rel begin segment 100
+	end.y = 0 rel begin segment 100
+	end.z = 30
+end segment
+
+segment 101
+	begin.x = 0
+	begin.y = dy rel begin segment 98
+	begin.z = 0
+	end.x = 0 rel begin segment 101
+	end.y = 0 rel begin segment 101
+	end.z = 1
+end segment
+
+segment 102
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 101
+	begin.y = 0 rel end segment 101
+	begin.z = 0 rel end segment 101
+	end.x = 0 rel begin segment 102
+	end.y = 1 rel begin segment 102
+	end.z = 18.480000
+end segment
+
+segment 103
+	begin.x = 0 rel end segment 102
+	begin.y = 0 rel end segment 102
+	begin.z = 0 rel end segment 102
+	end.x = 0 rel begin segment 103
+	end.y = 0 rel begin segment 103
+	end.z = 30
+end segment
+
+segment 104
+	begin.x = 0
+	begin.y = dy rel begin segment 101
+	begin.z = 0
+	end.x = 0 rel begin segment 104
+	end.y = 0 rel begin segment 104
+	end.z = 1
+end segment
+
+segment 105
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 104
+	begin.y = 0 rel end segment 104
+	begin.z = 0 rel end segment 104
+	end.x = 0 rel begin segment 105
+	end.y = 1 rel begin segment 105
+	end.z = 18.200000
+end segment
+
+segment 106
+	begin.x = 0 rel end segment 105
+	begin.y = 0 rel end segment 105
+	begin.z = 0 rel end segment 105
+	end.x = 0 rel begin segment 106
+	end.y = 0 rel begin segment 106
+	end.z = 30
+end segment
+
+segment 107
+	begin.x = 0
+	begin.y = dy rel begin segment 104
+	begin.z = 0
+	end.x = 0 rel begin segment 107
+	end.y = 0 rel begin segment 107
+	end.z = 1
+end segment
+
+segment 108
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 107
+	begin.y = 0 rel end segment 107
+	begin.z = 0 rel end segment 107
+	end.x = 0 rel begin segment 108
+	end.y = 1 rel begin segment 108
+	end.z = 17.920000
+end segment
+
+segment 109
+	begin.x = 0 rel end segment 108
+	begin.y = 0 rel end segment 108
+	begin.z = 0 rel end segment 108
+	end.x = 0 rel begin segment 109
+	end.y = 0 rel begin segment 109
+	end.z = 30
+end segment
+
+segment 110
+	begin.x = 0
+	begin.y = dy rel begin segment 107
+	begin.z = 0
+	end.x = 0 rel begin segment 110
+	end.y = 0 rel begin segment 110
+	end.z = 1
+end segment
+
+segment 111
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 110
+	begin.y = 0 rel end segment 110
+	begin.z = 0 rel end segment 110
+	end.x = 0 rel begin segment 111
+	end.y = 1 rel begin segment 111
+	end.z = 17.640000
+end segment
+
+segment 112
+	begin.x = 0 rel end segment 111
+	begin.y = 0 rel end segment 111
+	begin.z = 0 rel end segment 111
+	end.x = 0 rel begin segment 112
+	end.y = 0 rel begin segment 112
+	end.z = 30
+end segment
+
+segment 113
+	begin.x = 0
+	begin.y = dy rel begin segment 110
+	begin.z = 0
+	end.x = 0 rel begin segment 113
+	end.y = 0 rel begin segment 113
+	end.z = 1
+end segment
+
+segment 114
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 113
+	begin.y = 0 rel end segment 113
+	begin.z = 0 rel end segment 113
+	end.x = 0 rel begin segment 114
+	end.y = 1 rel begin segment 114
+	end.z = 17.360000
+end segment
+
+segment 115
+	begin.x = 0 rel end segment 114
+	begin.y = 0 rel end segment 114
+	begin.z = 0 rel end segment 114
+	end.x = 0 rel begin segment 115
+	end.y = 0 rel begin segment 115
+	end.z = 30
+end segment
+
+segment 116
+	begin.x = 0
+	begin.y = dy rel begin segment 113
+	begin.z = 0
+	end.x = 0 rel begin segment 116
+	end.y = 0 rel begin segment 116
+	end.z = 1
+end segment
+
+segment 117
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 116
+	begin.y = 0 rel end segment 116
+	begin.z = 0 rel end segment 116
+	end.x = 0 rel begin segment 117
+	end.y = 1 rel begin segment 117
+	end.z = 17.080000
+end segment
+
+segment 118
+	begin.x = 0 rel end segment 117
+	begin.y = 0 rel end segment 117
+	begin.z = 0 rel end segment 117
+	end.x = 0 rel begin segment 118
+	end.y = 0 rel begin segment 118
+	end.z = 30
+end segment
+
+segment 119
+	begin.x = 0
+	begin.y = dy rel begin segment 116
+	begin.z = 0
+	end.x = 0 rel begin segment 119
+	end.y = 0 rel begin segment 119
+	end.z = 1
+end segment
+
+segment 120
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 119
+	begin.y = 0 rel end segment 119
+	begin.z = 0 rel end segment 119
+	end.x = 0 rel begin segment 120
+	end.y = 1 rel begin segment 120
+	end.z = 16.800000
+end segment
+
+segment 121
+	begin.x = 0 rel end segment 120
+	begin.y = 0 rel end segment 120
+	begin.z = 0 rel end segment 120
+	end.x = 0 rel begin segment 121
+	end.y = 0 rel begin segment 121
+	end.z = 30
+end segment
+
+segment 122
+	begin.x = 0
+	begin.y = dy rel begin segment 119
+	begin.z = 0
+	end.x = 0 rel begin segment 122
+	end.y = 0 rel begin segment 122
+	end.z = 1
+end segment
+
+segment 123
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 122
+	begin.y = 0 rel end segment 122
+	begin.z = 0 rel end segment 122
+	end.x = 0 rel begin segment 123
+	end.y = 1 rel begin segment 123
+	end.z = 16.520000
+end segment
+
+segment 124
+	begin.x = 0 rel end segment 123
+	begin.y = 0 rel end segment 123
+	begin.z = 0 rel end segment 123
+	end.x = 0 rel begin segment 124
+	end.y = 0 rel begin segment 124
+	end.z = 30
+end segment
+
+segment 125
+	begin.x = 0
+	begin.y = dy rel begin segment 122
+	begin.z = 0
+	end.x = 0 rel begin segment 125
+	end.y = 0 rel begin segment 125
+	end.z = 1
+end segment
+
+segment 126
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 125
+	begin.y = 0 rel end segment 125
+	begin.z = 0 rel end segment 125
+	end.x = 0 rel begin segment 126
+	end.y = 1 rel begin segment 126
+	end.z = 16.240000
+end segment
+
+segment 127
+	begin.x = 0 rel end segment 126
+	begin.y = 0 rel end segment 126
+	begin.z = 0 rel end segment 126
+	end.x = 0 rel begin segment 127
+	end.y = 0 rel begin segment 127
+	end.z = 30
+end segment
+
+segment 128
+	begin.x = 0
+	begin.y = dy rel begin segment 125
+	begin.z = 0
+	end.x = 0 rel begin segment 128
+	end.y = 0 rel begin segment 128
+	end.z = 1
+end segment
+
+segment 129
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 128
+	begin.y = 0 rel end segment 128
+	begin.z = 0 rel end segment 128
+	end.x = 0 rel begin segment 129
+	end.y = 1 rel begin segment 129
+	end.z = 15.960000
+end segment
+
+segment 130
+	begin.x = 0 rel end segment 129
+	begin.y = 0 rel end segment 129
+	begin.z = 0 rel end segment 129
+	end.x = 0 rel begin segment 130
+	end.y = 0 rel begin segment 130
+	end.z = 30
+end segment
+
+segment 131
+	begin.x = 0
+	begin.y = dy rel begin segment 128
+	begin.z = 0
+	end.x = 0 rel begin segment 131
+	end.y = 0 rel begin segment 131
+	end.z = 1
+end segment
+
+segment 132
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 131
+	begin.y = 0 rel end segment 131
+	begin.z = 0 rel end segment 131
+	end.x = 0 rel begin segment 132
+	end.y = 1 rel begin segment 132
+	end.z = 15.680000
+end segment
+
+segment 133
+	begin.x = 0 rel end segment 132
+	begin.y = 0 rel end segment 132
+	begin.z = 0 rel end segment 132
+	end.x = 0 rel begin segment 133
+	end.y = 0 rel begin segment 133
+	end.z = 30
+end segment
+
+segment 134
+	begin.x = 0
+	begin.y = dy rel begin segment 131
+	begin.z = 0
+	end.x = 0 rel begin segment 134
+	end.y = 0 rel begin segment 134
+	end.z = 1
+end segment
+
+segment 135
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 134
+	begin.y = 0 rel end segment 134
+	begin.z = 0 rel end segment 134
+	end.x = 0 rel begin segment 135
+	end.y = 1 rel begin segment 135
+	end.z = 15.400000
+end segment
+
+segment 136
+	begin.x = 0 rel end segment 135
+	begin.y = 0 rel end segment 135
+	begin.z = 0 rel end segment 135
+	end.x = 0 rel begin segment 136
+	end.y = 0 rel begin segment 136
+	end.z = 30
+end segment
+
+segment 137
+	begin.x = 0
+	begin.y = dy rel begin segment 134
+	begin.z = 0
+	end.x = 0 rel begin segment 137
+	end.y = 0 rel begin segment 137
+	end.z = 1
+end segment
+
+segment 138
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 137
+	begin.y = 0 rel end segment 137
+	begin.z = 0 rel end segment 137
+	end.x = 0 rel begin segment 138
+	end.y = 1 rel begin segment 138
+	end.z = 15.120000
+end segment
+
+segment 139
+	begin.x = 0 rel end segment 138
+	begin.y = 0 rel end segment 138
+	begin.z = 0 rel end segment 138
+	end.x = 0 rel begin segment 139
+	end.y = 0 rel begin segment 139
+	end.z = 30
+end segment
+
+segment 140
+	begin.x = 0
+	begin.y = dy rel begin segment 137
+	begin.z = 0
+	end.x = 0 rel begin segment 140
+	end.y = 0 rel begin segment 140
+	end.z = 1
+end segment
+
+segment 141
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 140
+	begin.y = 0 rel end segment 140
+	begin.z = 0 rel end segment 140
+	end.x = 0 rel begin segment 141
+	end.y = 1 rel begin segment 141
+	end.z = 14.840000
+end segment
+
+segment 142
+	begin.x = 0 rel end segment 141
+	begin.y = 0 rel end segment 141
+	begin.z = 0 rel end segment 141
+	end.x = 0 rel begin segment 142
+	end.y = 0 rel begin segment 142
+	end.z = 30
+end segment
+
+segment 143
+	begin.x = 0
+	begin.y = dy rel begin segment 140
+	begin.z = 0
+	end.x = 0 rel begin segment 143
+	end.y = 0 rel begin segment 143
+	end.z = 1
+end segment
+
+segment 144
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 143
+	begin.y = 0 rel end segment 143
+	begin.z = 0 rel end segment 143
+	end.x = 0 rel begin segment 144
+	end.y = 1 rel begin segment 144
+	end.z = 14.560000
+end segment
+
+segment 145
+	begin.x = 0 rel end segment 144
+	begin.y = 0 rel end segment 144
+	begin.z = 0 rel end segment 144
+	end.x = 0 rel begin segment 145
+	end.y = 0 rel begin segment 145
+	end.z = 30
+end segment
+
+segment 146
+	begin.x = 0
+	begin.y = dy rel begin segment 143
+	begin.z = 0
+	end.x = 0 rel begin segment 146
+	end.y = 0 rel begin segment 146
+	end.z = 1
+end segment
+
+segment 147
+	position_taper = TAPER_USER_1
+	position_y_taper = TAPER_USER_1
+	begin.x = 0 rel end segment 146
+	begin.y = 0 rel end segment 146
+	begin.z = 0 rel end segment 146
+	end.x = 0 rel begin segment 147
+	end.y = 1 rel begin segment 147
+	end.z = 14.280000
+end segment
+
+segment 148
+	begin.x = 0 rel end segment 147
+	begin.y = 0 rel end segment 147
+	begin.z = 0 rel end segment 147
+	end.x = 0 rel begin segment 148
+	end.y = 0 rel begin segment 148
+	end.z = 30
+end segment
