@@ -17,7 +17,13 @@ import gcode_conversion as gcc
 from init_parse import init_parse
 from trigonometry_in_degrees import *
 
-
+'''
+# TODO:
+-linspace instead of frange
+-gcode parser
+-rimuovere primo punto delle guide d'onda
+-report on gcode plotters
+'''
 
 '''
 Check for options
@@ -206,8 +212,11 @@ Prints one full waveguide at a time
 '''
 
 global paragon
-
+counter = 0
 for n,beg in enumerate(begins):
+
+    counter += 1
+
 
     paragon = beg
 
@@ -314,7 +323,7 @@ for n,beg in enumerate(begins):
             y.append(paragon['end.y'])
             x.append(paragon['end.x'])
             x.append(paragon['end.x'])
-        
+
             axs[0,0].plot(x,z,color='k',linewidth=1)
             axs[0,1].plot(y,z,color='k',linewidth=1)
             axs[1,0].plot(x,y,color='k',linewidth=1)

@@ -1,7 +1,7 @@
 #init file for extract.py script
 #variables for script
-input = ind/73_core_HW.ind
-output = out/73_core.txt
-dz = 10
+input = ind/fras_bend2.ind
+output = out/bend_test.txt
+dz = 0.2
 acc_correction = 1
 conv_factor = 1
