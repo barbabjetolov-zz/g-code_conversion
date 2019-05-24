@@ -305,7 +305,7 @@ for n,beg in enumerate(begins):
     else:
         gcc.print_acceleration_correction_end(acc_correction,axes,output)
         output.write('\t///moving one step - multiscan///\n')
-        output.write('\t LINEAR X 0 Y $SCANSTEP + ()')
+        output.write('\tLINEAR X 0 Y $SCANSTEP Z ($SCANSTEP*$SLOPEY) F $SPEED\n')
         output.write('\t$SCAN = $SCAN + 1\n')
         output.write('ENDWHILE\n')
 
