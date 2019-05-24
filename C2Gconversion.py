@@ -215,7 +215,7 @@ for n,beg in enumerate(begins):
     Moves laser head to begin of segment
     '''
     output.write('\n\n///Moves head to begin of segment///\n\n')
-    output.write('\nLINEAR %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],paragon['begin.z'],
+    output.write('\nLINEAR %s %s %s %s %s %s*$RIN + (%s*$SLOPEX) + (%s*$SLOPEY) F $SPEED\n'%(axes[0],paragon['begin.z'],
                                                                                                axes[1],paragon['begin.y'],
                                                                                                axes[2],paragon['begin.x'],
                                                                                                paragon['begin.z'],paragon['begin.y']))
@@ -304,6 +304,8 @@ for n,beg in enumerate(begins):
 
     else:
         gcc.print_acceleration_correction_end(acc_correction,axes,output)
+        output.write('\t///moving one step - multiscan///\n')
+        output.write('\t LINEAR X 0 Y $SCANSTEP + ()')
         output.write('\t$SCAN = $SCAN + 1\n')
         output.write('ENDWHILE\n')
 
@@ -314,7 +316,7 @@ for n,beg in enumerate(begins):
             y.append(paragon['end.y'])
             x.append(paragon['end.x'])
             x.append(paragon['end.x'])
-        
+
             axs[0,0].plot(x,z,color='k',linewidth=1)
             axs[0,1].plot(y,z,color='k',linewidth=1)
             axs[1,0].plot(x,y,color='k',linewidth=1)
@@ -328,7 +330,7 @@ for n,beg in enumerate(begins):
             fig.canvas.flush_events()
 
         output.write('\n\n///Returns to origin///\n\n')
-        output.write('\nLINEAR %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],-paragon['end.z'],
+        output.write('\nLINEAR %s %s %s %s %s %s*$RIN + (%s*$SLOPEX) + (%s*$SLOPEY) F $SPEED\n'%(axes[0],-paragon['end.z'],
                                                                                                    axes[1],-paragon['end.y'],
                                                                                                    axes[2],-paragon['end.x'],
                                                                                                    -paragon['begin.z'],-paragon['begin.y']))

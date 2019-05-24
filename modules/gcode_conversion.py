@@ -61,7 +61,7 @@ def print_line(file,segment,axes):
               segment['begin.y'],segment['end.y'],
               segment['begin.z'],segment['end.z']]
 
-    file.write('LINEAR %s %f %s %f %s (%f + (%f*$SLOPEX)+(%f*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],limits[5]-limits[4],
+    file.write('LINEAR %s %f %s %f %s %f*$RIN + (%f*$SLOPEX)+(%f*$SLOPEY) F $SPEED\n'%(axes[0],limits[5]-limits[4],
                                                                                          axes[1],limits[3]-limits[2],
                                                                                          axes[2],limits[1]-limits[0],
                                                                                          limits[5]-limits[4],limits[3]-limits[2]))
@@ -74,14 +74,14 @@ Function that prints acceleration correction at the beginning of the waveguide
 def print_acceleration_correction_beginning(acc_correction,axes,output):
     #the head is automatically positioned at the beginning of the first segment
     output.write('\t//moves the head before acc correction\n')
-    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX)*$RIN F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2],-acc_correction))
+    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX) F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2],-acc_correction))
     output.write('\t$do1.x = 1\n\n') #opens shutter
     output.write('\t//acceleration correction\n')
-    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX)*$RIN F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2],-acc_correction))
+    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX) F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2],-acc_correction))
 
 def print_acceleration_correction_end(acc_correction,axes,output):
     output.write('\n\t//acceleration correction at the end of waveguide//\n')
-    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX)*$RIN F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2],-acc_correction))
+    output.write('\tLINEAR %s %f %s 0 %s (%f*$SLOPEX) F $SPEED\n'%(axes[0],acc_correction,axes[1],axes[2],-acc_correction))
     output.write('\t$do1.x = 0\n\n') #closes shutter
     #output.write('\tLINEAR %s %f %s 0 %s 0 F $SPEED\n'%(axes[0],-acc_correction,axes[1],axes[2]))
 
@@ -113,7 +113,7 @@ def points2gcode(dx,y,z,output,axes):
 
     output.write('\n\t//print interpolated function\n')
     for i in range(len(y[1:])):
-        output.write('\tLINEAR %s %f %s %f %s (%f + (%f*$SLOPEX)+(%f*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],dx,
+        output.write('\tLINEAR %s %f %s %f %s %f*$RIN + (%f*$SLOPEX)+(%f*$SLOPEY) F $SPEED\n'%(axes[0],dx,
                                                                                                  axes[1],y[i+1] - y[i],
                                                                                                  axes[2],z[i+1] - z[i],
                                                                                                  dx, y[i+1] - y[i]))
