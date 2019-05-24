@@ -184,7 +184,7 @@ for key, val in gcodeinit.items():
     output.write(' $%s'%key)
 output.write('\n\n')
 
-output.write('ENABLE X Y Z\nINC\nDWELL %s\n\n'%(gcodeinit['DWELL']))
+output.write('ENABLE X Y Z\nABS\nDWELL %s\n\n'%(gcodeinit['DWELL']))
 
 for key, val in gcodeinit.items():
     if key=='DWELL':
@@ -308,6 +308,7 @@ for n,beg in enumerate(begins):
         output.write('\tLINEAR X 0 Y $SCANSTEP Z ($SCANSTEP*$SLOPEY) F $SPEED\n')
         output.write('\t$SCAN = $SCAN + 1\n')
         output.write('ENDWHILE\n')
+        output.write('\n$SCAN = 0\n')
 
         if GRAPHICS:
             z.append(paragon['end.z'])
@@ -330,10 +331,12 @@ for n,beg in enumerate(begins):
             fig.canvas.flush_events()
 
         output.write('\n\n///Returns to origin///\n\n')
-        output.write('\nLINEAR %s %s %s %s %s %s*$RIN + (%s*$SLOPEX) + (%s*$SLOPEY) F $SPEED\n'%(axes[0],-paragon['end.z'],
-                                                                                                   axes[1],-paragon['end.y'],
-                                                                                                   axes[2],-paragon['end.x'],
-                                                                                                   -paragon['begin.z'],-paragon['begin.y']))
+
+        output.write('\nLINEAR X %s Y %s - $SCANSEP*$SCANNO Z %s*$RIN + (%s*$SLOPEX) + (%s*$SLOPEY) F $SPEED\n'%(-paragon['end.z'],
+                                                                                                                 -paragon['end.y'],
+                                                                                                                 -paragon['end.x'],
+                                                                                                                 -paragon['end.z'],
+                                                                                                                 -paragon['end.y']))
 
 
 x = []
