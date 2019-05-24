@@ -2,6 +2,6 @@
 #variables for script
 input = ind/73_core_HW.ind
 output = out/73_core.txt
-dz = 10
+dz = 50
 acc_correction = 1
 conv_factor = 1
