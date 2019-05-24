@@ -190,7 +190,7 @@ for key, val in gcodeinit.items():
     output.write(' $%s'%key)
 output.write('\n\n')
 
-output.write('ENABLE X Y Z\nINC\nDWELL %s\n\n'%(gcodeinit['DWELL']))
+output.write('ENABLE X Y Z\nG91\nDWELL %s\n\n'%(gcodeinit['DWELL']))
 
 for key, val in gcodeinit.items():
     if key=='DWELL':
@@ -224,7 +224,7 @@ for n,beg in enumerate(begins):
     Moves laser head to begin of segment
     '''
     output.write('\n\n///Moves head to begin of segment///\n\n')
-    output.write('\nLINEAR %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],paragon['begin.z'],
+    output.write('\nG01 %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],paragon['begin.z'],
                                                                                                axes[1],paragon['begin.y'],
                                                                                                axes[2],paragon['begin.x'],
                                                                                                paragon['begin.z'],paragon['begin.y']))
@@ -337,7 +337,7 @@ for n,beg in enumerate(begins):
             fig.canvas.flush_events()
 
         output.write('\n\n///Returns to origin///\n\n')
-        output.write('\nLINEAR %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],-paragon['end.z'],
+        output.write('\nG01 %s %s %s %s %s (%s + (%s*$SLOPEX) + (%s*$SLOPEY))*$RIN F $SPEED\n'%(axes[0],-paragon['end.z'],
                                                                                                    axes[1],-paragon['end.y'],
                                                                                                    axes[2],-paragon['end.x'],
                                                                                                    -paragon['begin.z'],-paragon['begin.y']))
