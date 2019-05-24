@@ -31,7 +31,7 @@ def interpolation(expression,segment,dz,axes,file):
 
     expression = expression.replace('z','z/(segment[\'end.z\'] - segment[\'begin.z\'])')
 
-    for i in frange(bz,ez+bz,dz):
+    for i in frange(bz,ez+dz,dz):
         z = i
         '''
         Rescaling of the function
